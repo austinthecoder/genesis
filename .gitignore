@@ -1,0 +1,6 @@
+.bundle
+.rspec
+.rvmrc
+config/database.yml
+log/*.log
+tmp/
