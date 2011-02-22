@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the admin sign-in page/
       new_admin_user_session_path
 
+    when /the template creation page/
+      new_admin_template_path
+
     else
       begin
         page_name =~ /the (.*) page/
