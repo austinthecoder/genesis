@@ -13,10 +13,13 @@
 ActiveRecord::Schema.define(:version => 20110222071519) do
 
   create_table "templates", :force => true do |t|
+    t.string   "name"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "templates", ["name"], :name => "index_templates_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                              :default => "", :null => false

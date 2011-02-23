@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Template do
 
-  describe "instance methods" do
+  subject { Template.new }
 
-  end
+  it { should_not accept_values_for(:name, nil, '', ' ') }
 
 end

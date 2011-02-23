@@ -1,13 +1,24 @@
-class Admin::TemplatesController < ApplicationController
+class Admin::TemplatesController < AdminController
+
+  before_filter :build_template, :only => %w(new create)
 
   def new
-    @tpl = Template.new
   end
 
   def create
-    Template.create!(params[:template])
-    flash.notice = "Wowza weeza! Template was created!"
-    redirect_to admin_templates_url
+    if @tpl.save
+      flash.notice = "Wowza weeza! Template was created!"
+      redirect_to admin_templates_url
+    else
+      flash.alert = "Houston, we have some problems."
+      render :new
+    end
+  end
+
+  private
+
+  def build_template
+    @tpl = Template.new(params[:template])
   end
 
 end

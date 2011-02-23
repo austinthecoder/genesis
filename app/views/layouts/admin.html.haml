@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title Genesis
+    = csrf_meta_tag
+    = stylesheet_link_tag 'admin'
+    = javascript_include_tag 'admin'
+  %body
+    #menu
+      %ul
+        %li= link_to "Pages", "#"
+        %li= link_to "Themes", "#"
+        %li= link_to "Assets", "#"
+      .clear
+    #content
+      #main
+        #main_inner
+          - if flash.notice
+            %p.flash.notice= flash.notice
+          - if flash.alert
+            %p.flash.alert= flash.alert
+          = yield
+      #sidebar
+        #sidebar_inner
+          [sidebar]
+      .clear
+    #footer
+      [footer]

@@ -5,6 +5,7 @@ gem 'pg', '0.10.1'
 gem 'devise', '1.1.7'
 gem 'haml', '3.0.25'
 gem 'simple_form', '1.3.1'
+gem 'compass', '0.10.6'
 
 group :test do
   gem 'capybara', '0.4.1.2'
@@ -16,6 +17,7 @@ group :test do
   gem 'webmock', '1.6.2'
   gem 'cover_me', '1.0.0.rc5'
   gem 'watchr', '0.7'
+  gem 'accept_values_for', '0.3.1'
 end
 
 group :development do

@@ -2,6 +2,9 @@ GEM
   remote: http://rubygems.org/
   specs:
     abstract (1.0.0)
+    accept_values_for (0.3.1)
+      activerecord
+      rspec
     actionmailer (3.0.4)
       actionpack (= 3.0.4)
       mail (~> 2.2.15)
@@ -44,6 +47,8 @@ GEM
     celerity (0.8.8)
     childprocess (0.1.7)
       ffi (~> 0.6.3)
+    compass (0.10.6)
+      haml (>= 3.0.4)
     configatron (2.6.4)
       yamler (>= 0.1.0)
     configuration (1.2.0)
@@ -154,7 +159,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  accept_values_for (= 0.3.1)
   capybara (= 0.4.1.2)
+  compass (= 0.10.6)
   cover_me (= 1.0.0.rc5)
   cucumber-rails (= 0.3.2)
   database_cleaner (= 0.6.3)
