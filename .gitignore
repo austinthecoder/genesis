@@ -2,5 +2,7 @@
 .rspec
 .rvmrc
 config/database.yml
+coverage.data
+coverage/*
 log/*.log
 tmp/
