@@ -1,10 +1,16 @@
+GIT
+  remote: https://github.com/bogdan/accept_values_for.git
+  revision: a811325480f959a626c6dca316eecc6aed2d921f
+  ref: a811325480f959a626c6
+  specs:
+    accept_values_for (0.3.1)
+      activerecord
+      rspec
+
 GEM
   remote: http://rubygems.org/
   specs:
     abstract (1.0.0)
-    accept_values_for (0.3.1)
-      activerecord
-      rspec
     actionmailer (3.0.4)
       actionpack (= 3.0.4)
       mail (~> 2.2.15)
@@ -33,6 +39,7 @@ GEM
     activesupport (3.0.4)
     addressable (2.2.4)
     arel (2.0.8)
+    basic_tree (1.0.0)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     capybara (0.4.1.2)
@@ -159,7 +166,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accept_values_for (= 0.3.1)
+  accept_values_for (= 0.3.1)!
+  basic_tree (= 1.0.0)
   capybara (= 0.4.1.2)
   compass (= 0.10.6)
   cover_me (= 1.0.0.rc5)

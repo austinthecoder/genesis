@@ -15,11 +15,12 @@ ActiveRecord::Schema.define(:version => 20110222071519) do
   create_table "templates", :force => true do |t|
     t.string   "name"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "templates", ["name"], :name => "index_templates_on_name", :unique => true
+  add_index "templates", ["user_id", "name"], :name => "index_templates_on_user_id_and_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                              :default => "", :null => false

@@ -8,9 +8,8 @@
   %body
     #menu
       %ul
-        %li= link_to "Pages", "#"
-        %li= link_to "Themes", "#"
-        %li= link_to "Assets", "#"
+        -# main_menu.each do |title, path|
+          %li=# link_to title, path
       .clear
     #content
       #main
@@ -22,7 +21,9 @@
           = yield
       #sidebar
         #sidebar_inner
-          [sidebar]
+          %ul
+            -# sub_menu.each do |title, path|
+              %li=# link_to title, path
       .clear
     #footer
       [footer]

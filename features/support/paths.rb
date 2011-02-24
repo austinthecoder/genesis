@@ -12,7 +12,7 @@ module NavigationHelpers
       '/'
 
     when /the admin sign-in page/
-      new_admin_user_session_path
+      new_user_session_path
 
     when /the template creation page/
       new_admin_template_path

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Admin::TemplatesController do
 
+  before { sign_in :user, Factory(:user) }
+
   describe "GET index" do
     it "renders the index template" do
       get :index
@@ -12,7 +14,6 @@ describe Admin::TemplatesController do
   describe "GET new" do
     it "assigns a new template" do
       get :new
-      p assigns(:tpl)
       (assigns(:tpl).is_a?(Template) && assigns(:tpl).new_record?).should be_true
     end
 
@@ -28,9 +29,9 @@ describe Admin::TemplatesController do
         @params = {:template => Factory.attributes_for(:template)}
       end
 
-      it "creates a template" do
+      it "creates a template for the current user" do
         post :create, @params
-        Template.count.should eq(1)
+        controller.current_user.templates.count.should eq(1)
       end
 
       it "sets the template's attributes" do

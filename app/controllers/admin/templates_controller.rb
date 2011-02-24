@@ -18,7 +18,7 @@ class Admin::TemplatesController < AdminController
   private
 
   def build_template
-    @tpl = Template.new(params[:template])
+    @tpl = current_user.templates.build(params[:template])
   end
 
 end

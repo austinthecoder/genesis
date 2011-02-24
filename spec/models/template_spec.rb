@@ -4,6 +4,16 @@ describe Template do
 
   subject { Template.new }
 
-  it { should_not accept_values_for(:name, nil, '', ' ') }
+  describe "#user" do
+    context "when a user exists with the id 234" do
+      before { @u = Factory(:user, :id => 234) }
+
+      context "when the user_id is set to that id" do
+        before { subject.user_id = 234 }
+
+        it { subject.user.should == @u }
+      end
+    end
+  end
 
 end

@@ -3,11 +3,12 @@ class CreateTemplates < ActiveRecord::Migration
     create_table :templates do |t|
       t.string :name
       t.text :content
+      t.belongs_to :user
 
       t.timestamps
     end
 
-    add_index :templates, :name, :unique => true
+    add_index :templates, [:user_id, :name], :unique => true
   end
 
   def self.down
