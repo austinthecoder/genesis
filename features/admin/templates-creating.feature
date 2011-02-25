@@ -11,6 +11,7 @@ Feature: Creating Templates
     And I fill in the template's content with "some content"
     And I press "Save this template"
     Then I should see "Wowza weeza! Template was created!"
+    And I should see "Home" within the templates within the sidebar
 
 
   Scenario: Making sure name isn't blank

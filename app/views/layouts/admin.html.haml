@@ -8,6 +8,7 @@
   %body
     #menu
       %ul
+        %li= link_to 'Sign out', destroy_user_session_path
         -# main_menu.each do |title, path|
           %li=# link_to title, path
       .clear
@@ -21,6 +22,7 @@
           = yield
       #sidebar
         #sidebar_inner
+          = yield :sidebar
           %ul
             -# sub_menu.each do |title, path|
               %li=# link_to title, path

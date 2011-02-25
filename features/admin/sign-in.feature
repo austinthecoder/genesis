@@ -21,3 +21,11 @@ Feature: Admin Sign-in
       | Password | secret           |
     And I press "Sign in"
     Then I should see "Signed in successfully"
+
+
+  Scenario: Sign out
+    Given a user
+    And that user is signed in
+
+    When I follow "Sign out"
+    Then I should see "Signed out successfully."

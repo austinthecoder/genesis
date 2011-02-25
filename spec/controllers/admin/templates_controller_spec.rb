@@ -5,6 +5,12 @@ describe Admin::TemplatesController do
   before { sign_in :user, Factory(:user) }
 
   describe "GET index" do
+    it "assigns the templates" do
+      @tpls = (1..3).map { |i| Factory(:template) }
+      get :index
+      assigns(:tpls).should eq(@tpls)
+    end
+
     it "renders the index template" do
       get :index
       response.should render_template(:index)

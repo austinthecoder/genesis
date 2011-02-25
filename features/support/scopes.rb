@@ -5,7 +5,7 @@ module ScopeHelpers
     when "the sidebar"
       "#sidebar"
 
-    when "templates"
+    when "the templates"
       ".templates"
 
     when "the template form"

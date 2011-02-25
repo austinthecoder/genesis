@@ -1,5 +1,6 @@
 FactoryGirl.define do
   sequence(:email) { |n| "user#{n}@example.com" }
+  sequence(:name) { |n| "name#{n}" }
 
   factory :user do
     email
@@ -8,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :template do
-    name "home"
+    name { Factory.next(:name) }
     user
   end
 end

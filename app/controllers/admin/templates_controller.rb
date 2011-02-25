@@ -2,6 +2,10 @@ class Admin::TemplatesController < AdminController
 
   before_filter :build_template, :only => %w(new create)
 
+  def index
+    @tpls = Template.all
+  end
+
   def new
   end
 

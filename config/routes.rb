@@ -7,6 +7,8 @@ Genesis::Application.routes.draw do
   namespace "admin" do
     resources :templates, :only => %w(index new create)
 
+    resource :theme, :only => %w(show)
+
     root :to => "pages#dashboard"
   end
 

@@ -17,6 +17,9 @@ module NavigationHelpers
     when /the template creation page/
       new_admin_template_path
 
+    when /the theme page/
+      admin_theme_path
+
     else
       begin
         page_name =~ /the (.*) page/

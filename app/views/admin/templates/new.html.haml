@@ -3,9 +3,3 @@
   = f.input :content, :label => false
   %button{:type => 'submit'}
     Save this template
-
-/ = content_for :sidebar do
-/   .templates
-/     %ul
-/       - @templates.each do |t|
-/         %li= link_to t.name, edit_admin_template_path(t)
