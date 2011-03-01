@@ -1,7 +1,7 @@
 class Admin::ThemesController < AdminController
 
   def show
-    @tpls = current_user.templates
+    assign_templates
   end
 
 end

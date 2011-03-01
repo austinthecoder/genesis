@@ -1,5 +1,4 @@
-= simple_form_for [:admin, @tpl] do |f|
-  = f.input :name, :wrapper_html => {:class => 'name'}
-  = f.input :content, :label => false
-  %button{:type => 'submit'}
-    Save this template
+= render 'form'
+
+= content_for :sidebar do
+  = render 'list'

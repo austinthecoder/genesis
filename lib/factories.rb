@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :template do
-    name { Factory.next(:name) }
+    name
     user
   end
 end

@@ -5,7 +5,7 @@ Genesis::Application.routes.draw do
   end
 
   namespace "admin" do
-    resources :templates, :only => %w(index new create)
+    resources :templates, :only => %w(show new create edit update)
 
     resource :theme, :only => %w(show)
 
