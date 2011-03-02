@@ -2,20 +2,22 @@ require 'spec_helper'
 
 describe Admin::ThemesController do
 
-  before { sign_in :user, Factory(:user) }
+  before(:all) do
+    @user = Factory(:user)
+    2.times { Factory(:template) }
+    @users_tpls = (1..3).map { |i| Factory(:template, :user => @user) }
+  end
+
+  before { sign_in :user, @user }
 
   describe "GET show" do
+    before { get :show }
+
     it "assigns the templates for the current user" do
-      2.times { Factory(:template) }
-      @tpls = (1..3).map { |i| Factory(:template, :user => controller.current_user) }
-      get :show
-      assigns(:tpls).should eq(@tpls)
+      assigns(:tpls).sort_by { |t| t.id }.should eq(@users_tpls.sort_by { |t| t.id })
     end
 
-    it "renders the show template" do
-      get :show
-      response.should render_template(:show)
-    end
+    it { response.should render_template(:show) }
   end
 
 end

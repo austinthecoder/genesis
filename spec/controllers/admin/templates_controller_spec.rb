@@ -2,10 +2,14 @@ require 'spec_helper'
 
 describe Admin::TemplatesController do
 
-  before do
-    sign_in :user, Factory(:user)
+  before(:all) do
+    @user = Factory(:user)
     2.times { Factory(:template) }
-    @user_tpls = (1..3).map { |i| Factory(:template, :user => controller.current_user) }
+    @user_tpls = (1..3).map { |i| Factory(:template, :user => @user) }
+  end
+
+  before do
+    sign_in :user, @user
     @params = HashWithIndifferentAccess.new
   end
 
