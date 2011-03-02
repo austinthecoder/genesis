@@ -9,6 +9,7 @@ gem 'compass', '0.10.6'
 gem 'basic_tree', '1.0.0'
 
 group :test do
+  gem 'spork', '0.9.0.rc4'
   gem 'capybara', '0.4.1.2'
   gem 'rspec-rails', '2.5.0'
   gem 'cucumber-rails', '0.3.2'
