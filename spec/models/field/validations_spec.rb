@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe Field, 'validations' do
 
-  context "a new field with valid attributes" do
+  context "with valid attributes" do
     subject { Factory.build(:field) }
 
     it { should be_valid }
     it { should_not accept_values_for(:name, nil, '', ' ') }
     it { should_not accept_values_for(:template_id, nil) }
+    it { should_not accept_values_for(:field_type, nil, '', '   ', 'foo', 'bar') }
+    it { should accept_values_for(:field_type, 'short_text', 'long_text') }
 
     context "other fields exist" do
       before do

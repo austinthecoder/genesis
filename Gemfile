@@ -8,6 +8,7 @@ gem 'simple_form', '1.3.1'
 gem 'compass', '0.10.6'
 gem 'basic_tree', '1.0.0'
 gem 'paper_trail', '2.0.1'
+gem 'attribute_normalizer', '0.3.1'
 
 group :test do
   gem 'spork', '0.9.0.rc4'

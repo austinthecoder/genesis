@@ -10,8 +10,12 @@ class Field < ActiveRecord::Base
   ### associations ###
   belongs_to :template
 
+  ### normalizations ###
+  normalize_attributes :name
+
   ### validations ###
   validates :template_id, :presence => true
+  validates :field_type, :inclusion => {:in => TYPE_OPTIONS.keys}
   validates :name,
     :presence => true,
     :uniqueness => {:scope => :template_id}

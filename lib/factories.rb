@@ -15,6 +15,7 @@ FactoryGirl.define do
 
   factory :field do
     name
+    field_type Field::TYPE_OPTIONS.keys[0]
     template
   end
 end

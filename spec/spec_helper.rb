@@ -15,6 +15,7 @@ Spork.prefork do
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
+    config.include AttributeNormalizer::RSpecMatcher, :type => :model
     config.include Devise::TestHelpers, :type => :controller
     # == Mock Framework
     #
