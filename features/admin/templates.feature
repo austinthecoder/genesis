@@ -2,7 +2,7 @@ Feature: Creating Templates
 
   Background:
     Given a user
-    And that user is signed in
+    And I am signed in as that user
     And I am on the template creation page
 
 ##################################################

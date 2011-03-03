@@ -5,6 +5,10 @@ Given /^templates for (that user) with the attributes:$/ do |user, table|
   end
 end
 
+Given /^a template with the name "([^"]*)" for (that user)$/ do |name, user|
+  @template = Factory(:template, :name => name, :user => user)
+end
+
 ##################################################
 
 When /^I fill in the template's content with "([^"]*)"$/ do |text|

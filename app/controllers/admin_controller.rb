@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   private
 
   def assign_templates
-    @tpls = templates_scope.all
+    @tpls = templates_scope.order("created_at DESC").all
   end
 
   def templates_scope

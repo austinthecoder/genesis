@@ -5,7 +5,15 @@ Genesis::Application.routes.draw do
   end
 
   namespace "admin" do
-    resources :templates, :only => %w(show new create edit update)
+    resources :versions, :only => [] do
+      member { post :revert }
+    end
+
+    resources :templates, :only => %w(show new create edit update) do
+      resources :fields, :only => %w(index create)
+    end
+
+    resources :fields, :only => %w(destroy)
 
     resource :theme, :only => %w(show)
 

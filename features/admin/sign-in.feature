@@ -25,7 +25,7 @@ Feature: Admin Sign-in
 
   Scenario: Sign out
     Given a user
-    And that user is signed in
+    And I am signed in as that user
 
     When I follow "Sign out"
     Then I should see "Signed out successfully."

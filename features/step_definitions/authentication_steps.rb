@@ -1,4 +1,4 @@
-Given /^(that user) is signed in$/ do |user|
+Given /^I am signed in as (that user)$/ do |user|
   sign_in(user)
 end
 

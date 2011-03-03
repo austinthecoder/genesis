@@ -270,60 +270,61 @@ a {
 /* line 18, ../../app/stylesheets/admin.scss */
 .flash {
   color: #fff;
+  margin-bottom: 20px;
   padding: 2px 10px;
 }
 
-/* line 23, ../../app/stylesheets/admin.scss */
+/* line 24, ../../app/stylesheets/admin.scss */
 .notice {
   background: #66f;
 }
 
-/* line 27, ../../app/stylesheets/admin.scss */
+/* line 28, ../../app/stylesheets/admin.scss */
 .alert {
   background: #600;
 }
 
-/* line 33, ../../app/stylesheets/admin.scss */
+/* line 34, ../../app/stylesheets/admin.scss */
 #menu {
   background: #eee;
   padding: 20px 30px;
 }
-/* line 37, ../../app/stylesheets/admin.scss */
+/* line 38, ../../app/stylesheets/admin.scss */
 #menu ul {
   margin: 0;
 }
-/* line 39, ../../app/stylesheets/admin.scss */
+/* line 40, ../../app/stylesheets/admin.scss */
 #menu li {
   list-style: none;
   float: left;
   margin-right: 30px;
 }
 
-/* line 46, ../../app/stylesheets/admin.scss */
+/* line 47, ../../app/stylesheets/admin.scss */
 #content {
   background: #ddd;
 }
-/* line 49, ../../app/stylesheets/admin.scss */
+/* line 50, ../../app/stylesheets/admin.scss */
 #content #main {
   background: #fff;
   float: left;
   width: 70%;
 }
-/* line 54, ../../app/stylesheets/admin.scss */
+/* line 55, ../../app/stylesheets/admin.scss */
 #content #main #main_inner {
   padding: 20px 30px;
 }
-/* line 57, ../../app/stylesheets/admin.scss */
+/* line 58, ../../app/stylesheets/admin.scss */
 #content #sidebar {
   float: right;
   width: 30%;
 }
-/* line 61, ../../app/stylesheets/admin.scss */
+/* line 62, ../../app/stylesheets/admin.scss */
 #content #sidebar #sidebar_inner {
   padding: 20px 30px;
 }
 
-/* line 65, ../../app/stylesheets/admin.scss */
+/* line 66, ../../app/stylesheets/admin.scss */
 #footer {
   background: #eee;
   padding: 20px 30px;

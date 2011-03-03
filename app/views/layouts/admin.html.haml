@@ -16,9 +16,9 @@
       #main
         #main_inner
           - if flash.notice
-            %p.flash.notice= flash.notice
+            .flash.notice= raw(flash.notice)
           - if flash.alert
-            %p.flash.alert= flash.alert
+            .flash.alert= raw(flash.alert)
           = yield
       #sidebar
         #sidebar_inner

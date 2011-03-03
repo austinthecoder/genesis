@@ -9,8 +9,7 @@ class Admin::TemplatesController < AdminController
 
   def create
     if @tpl.save
-      flash.notice = "Wowza weeza! Template was created!"
-      redirect_to edit_admin_template_url(@tpl)
+      redirect_to edit_admin_template_url(@tpl), :notice => "Wowza weeza! Template was created!"
     else
       flash.alert = "Houston, we have some problems."
       render :new

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222071519) do
+ActiveRecord::Schema.define(:version => 20110303044357) do
+
+  create_table "fields", :force => true do |t|
+    t.integer  "template_id"
+    t.string   "name"
+    t.string   "field_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fields", ["template_id", "name"], :name => "index_fields_on_template_id_and_name", :unique => true
+  add_index "fields", ["template_id"], :name => "index_fields_on_template_id"
 
   create_table "templates", :force => true do |t|
     t.string   "name"
@@ -38,5 +49,16 @@ ActiveRecord::Schema.define(:version => 20110222071519) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
 end

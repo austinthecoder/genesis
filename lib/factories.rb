@@ -12,4 +12,8 @@ FactoryGirl.define do
     name
     user
   end
+
+  factory :field do
+    name
+  end
 end

@@ -20,6 +20,9 @@ module NavigationHelpers
     when /the theme page/
       admin_theme_path
 
+    when /the page for the template/
+      edit_admin_template_path(@template)
+
     when /the edit page for the template with the name "([^"]*)"/
       edit_admin_template_path(Template.find_by_name($1))
 

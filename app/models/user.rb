@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   ### associations ###
   has_many :templates
+  has_many :fields, :through => :templates
 
   ### validations ###
   validates :email,
