@@ -49,6 +49,17 @@ Feature: Template Fields
       | body       | long text  |
       | footer     | short text |
 
+    When I fill in "Name" with "body"
+    And I press "add"
+    Then I should see "Dag nabbit. There were some problems."
+    And I should see "has already been taken" within the name input
+    And I should see the fields table, which looks like:
+      | Name       | Type       |
+      | page title | short text |
+      | permalink  | short text |
+      | body       | long text  |
+      | footer     | short text |
+
     # removing a field
     When I press "remove" within the row for the field with the name "body"
     Then I should see "Field was removed."

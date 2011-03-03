@@ -17,18 +17,26 @@ describe Admin::TemplatesController do
 
   ##################################################
 
+  {
+    :get => :new,
+    :post => :create
+  }.each do |http_method, action|
+    describe "#{http_method.upcase} #{action}" do
+      it "assigns the templates for the current user (newest first)" do
+        send(http_method, action, @params)
+        assigns(:tpls).should eq([@user_tpls[2], @user_tpls[0], @user_tpls[1]])
+      end
+    end
+  end
+
   describe "GET new" do
     before { get :new }
+
+    it { response.should render_template(:new) }
 
     it "assigns a new template" do
       (assigns(:tpl).is_a?(Template) && assigns(:tpl).new_record?).should be_true
     end
-
-    it "assigns the templates for the current user (newest first)" do
-      assigns(:tpls).should eq([@user_tpls[2], @user_tpls[0], @user_tpls[1]])
-    end
-
-    it { response.should render_template(:new) }
   end
 
   ##################################################
@@ -40,6 +48,8 @@ describe Admin::TemplatesController do
         post :create, @params
       end
 
+      it { flash[:notice].should eq("Wowza weeza! Template was created!") }
+
       it "creates a template for the current user" do
         controller.current_user.templates.count.should eq(@user_tpls.size + 1)
       end
@@ -49,8 +59,6 @@ describe Admin::TemplatesController do
         t.name.should eq('n')
         t.content.should eq('c')
       end
-
-      it { flash[:notice].should eq("Wowza weeza! Template was created!") }
 
       it "redirects to the edit template url" do
         response.should redirect_to(edit_admin_template_url(Template.last))
@@ -63,16 +71,12 @@ describe Admin::TemplatesController do
         post :create
       end
 
+      it { flash[:alert].should eq("Houston, we have some problems.") }
+      it { response.should render_template(:new) }
+
       it "doesn't create a template" do
         Template.count.should eq(@nbr_tpls)
       end
-
-      it "assigns the templates for the current user (newest first)" do
-        assigns(:tpls).should eq([@user_tpls[2], @user_tpls[0], @user_tpls[1]])
-      end
-
-      it { flash[:alert].should eq("Houston, we have some problems.") }
-      it { response.should render_template(:new) }
     end
   end
 
@@ -84,17 +88,28 @@ describe Admin::TemplatesController do
       @params[:id] = @tpl.id
     end
 
+    {
+      :get => :edit,
+      :put => :update
+    }.each do |http_method, action|
+      describe "#{http_method.upcase} #{action}" do
+        context "when the id matches a template belonging to the user" do
+          before { send(http_method, action, @params) }
+
+          it "assigns the templates for the current user (newest first)" do
+            assigns(:tpls).should eq([@tpl, @user_tpls[2], @user_tpls[0], @user_tpls[1]])
+          end
+
+          it "assigns the template" do
+            assigns(:tpl).should eq(@tpl)
+          end
+        end
+      end
+    end
+
     describe "GET edit" do
       context "when the id matches a template belonging to the user" do
         before { get :edit, @params }
-
-        it "assigns the templates for the current user (newest first)" do
-          assigns(:tpls).should eq([@tpl, @user_tpls[2], @user_tpls[0], @user_tpls[1]])
-        end
-
-        it "assigns the template" do
-          assigns(:tpl).should eq(@tpl)
-        end
 
         it { response.should render_template(:edit) }
       end
@@ -110,17 +125,13 @@ describe Admin::TemplatesController do
             put :update, @params
           end
 
-          it "assigns the template" do
-            assigns(:tpl).should eq(@tpl)
-          end
+          it { response.should redirect_to(edit_admin_template_url(@tpl)) }
 
           it "updates the template from the params" do
             t = Template.find(@tpl.id)
             t.name.should eq('foosbars')
             t.content.should eq('skeeza mcgeeza')
           end
-
-          it { response.should redirect_to(edit_admin_template_url(@tpl)) }
         end
 
         context "with invalid params" do
@@ -130,21 +141,12 @@ describe Admin::TemplatesController do
             put :update, @params
           end
 
-          it "assigns the templates for the current user (newest first)" do
-            assigns(:tpls).should eq([@tpl, @user_tpls[2], @user_tpls[0], @user_tpls[1]])
-          end
-
           it { flash[:alert].should eq("Houston, we have some problems.") }
-
-          it "assigns the template" do
-            assigns(:tpl).should eq(@tpl)
-          end
+          it { response.should render_template(:edit) }
 
           it "does not update the template" do
             Template.find(@tpl.id).updated_at.should eq(@updated_at)
           end
-
-          it { response.should render_template(:edit) }
         end
       end
     end

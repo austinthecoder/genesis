@@ -11,7 +11,10 @@ class Field < ActiveRecord::Base
   belongs_to :template
 
   ### validations ###
-  validates :name, :presence => true
+  validates :template_id, :presence => true
+  validates :name,
+    :presence => true,
+    :uniqueness => {:scope => :template_id}
 
   def human_field_type
     TYPE_OPTIONS[self[:field_type]]

@@ -15,5 +15,6 @@ FactoryGirl.define do
 
   factory :field do
     name
+    template
   end
 end
