@@ -111,7 +111,7 @@ Feature: Creating Templates
       | Tpl4 |
       | Tpl5 |
 
-    When I go to the edit page for the template with the name "Tpl1"
+    When I go to the page for the template with the name "Tpl1"
     Then I should see each of the following within the templates within the sidebar:
       | Tpl1 |
       | Tpl2 |

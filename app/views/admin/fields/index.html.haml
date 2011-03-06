@@ -1,27 +1,33 @@
-%table.fields
-  %thead
-    %tr
-      %th Name
-      %th Type
-      %th 
-  %tbody
-    %tr
-      %td page title
-      %td short text
-      %td 
-    %tr
-      %td permalink
-      %td short text
-      %td 
-    - @fields.each do |f|
-      %tr{:id => "field_#{f.id}"}
-        %td= f.name
-        %td= f.human_field_type
-        %td= button_to "remove", admin_field_path(f), :method => "delete"
+.section
+  %table.fields
+    %thead
+      %tr
+        %th Name
+        %th Type
+        %th 
+    %tbody
+      %tr
+        %td page title
+        %td short text
+        %td 
+      %tr
+        %td permalink
+        %td short text
+        %td 
+      - @fields.each do |f|
+        %tr{:id => "field_#{f.id}"}
+          %td= f.name
+          %td= f.human_field_type
+          %td= button_to "remove", admin_field_path(f), :method => "delete"
 
-= simple_form_for [:admin, @tpl, @field] do |f|
-  = f.input :name, :wrapper_html => {:class => 'name'}
-  = f.label :field_type, 'Type'
-  = f.collection_select :field_type, Field::TYPE_OPTIONS, :first, :last
-  %p
-    %button{:type => 'submit'} add
+.section
+  = simple_form_for [:admin, @tpl, @field] do |f|
+    = f.input :name, :wrapper_html => {:class => 'name'}
+    = f.input :field_type,
+      :collection => Field::TYPE_OPTIONS,
+      :label_method => :last,
+      :value_method => :first,
+      :include_blank => false,
+      :label => 'Type'
+    %div
+      %button{:type => 'submit'} Add

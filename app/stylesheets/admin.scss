@@ -29,6 +29,25 @@ a { text-decoration: none; }
   background: #600;
 }
 
+.section {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+}
+
+form {
+  .input {
+    padding-right: 8px;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 100%;
+  }
+  label { display: block; }
+  textarea { width: 100%; }
+}
+
 //////////////////////////////////////////////////
 
 #menu {
@@ -52,7 +71,7 @@ a { text-decoration: none; }
     float: left;
     width: 70%;
 
-    #main_inner { padding: 20px 30px; }
+    //#main_inner { padding: 20px 30px; }
   }
 
   #sidebar {

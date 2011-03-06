@@ -9,7 +9,7 @@ Feature: Template Fields
 
   Scenario: Viewing and adding a field
     When I go to the page for the template
-    And I follow "Add/remove template data"
+    And I follow "template data"
     Then I should see the fields table, which looks like:
       | Name       | Type       |
       | page title | short text |
@@ -18,7 +18,7 @@ Feature: Template Fields
     # adding a field
     When I fill in "Name" with "body"
     And I select "long text" from "Type"
-    And I press "add"
+    And I press "Add"
     Then I should see "Kablam! Added!"
     And I should see the fields table, which looks like:
       | Name       | Type       |
@@ -28,7 +28,7 @@ Feature: Template Fields
 
     # adding another field, using default type
     When I fill in "Name" with "footer"
-    And I press "add"
+    And I press "Add"
     Then I should see "Kablam! Added!"
     And I should see the fields table, which looks like:
       | Name       | Type       |
@@ -39,7 +39,7 @@ Feature: Template Fields
 
     # validations
     When I fill in "Name" with ""
-    And I press "add"
+    And I press "Add"
     Then I should see "Dag nabbit. There were some problems."
     And I should see "can't be blank" within the name input
     And I should see the fields table, which looks like:
@@ -50,7 +50,7 @@ Feature: Template Fields
       | footer     | short text |
 
     When I fill in "Name" with "body"
-    And I press "add"
+    And I press "Add"
     Then I should see "Dag nabbit. There were some problems."
     And I should see "has already been taken" within the name input
     And I should see the fields table, which looks like:
