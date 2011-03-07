@@ -8,6 +8,7 @@
   %body
     #menu
       %ul
+        %li= link_to "Pages", admin_pages_path
         %li= link_to "Theme", admin_theme_path
         %li= link_to 'Sign out', destroy_user_session_path
         -# main_menu.each do |title, path|

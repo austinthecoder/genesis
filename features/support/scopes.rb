@@ -17,6 +17,11 @@ module ScopeHelpers
     when "the name input"
       ".name.input"
 
+    when "the list of pages" then ".pages"
+    when /the page with the title "([^"]*)"/
+      page = Page.find_by_title($1)
+      "#page_#{page.id}"
+
     when /the row for the field with the name "([^"]*)"/
       fields = Field.where(:name => $1)
       field = case fields.size

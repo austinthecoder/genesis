@@ -9,6 +9,10 @@ Genesis::Application.routes.draw do
       member { post :revert }
     end
 
+    resources :pages, :only => %w(index new create show edit) do
+      resources :pages, :only => %w(new create)
+    end
+
     resources :templates, :only => %w(show new create edit update) do
       resources :fields, :only => %w(index create)
     end
@@ -17,7 +21,7 @@ Genesis::Application.routes.draw do
 
     resource :theme, :only => %w(show)
 
-    root :to => "pages#dashboard"
+    root :to => "dashboard#index"
   end
 
 end

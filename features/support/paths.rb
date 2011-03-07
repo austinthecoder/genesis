@@ -14,17 +14,14 @@ module NavigationHelpers
     when /the admin sign-in page/
       new_user_session_path
 
-    when /the template creation page/
-      new_admin_template_path
+    # templates
+    when /the template creation page/ then new_admin_template_path
+    when /the page for the template with the name "([^"]*)"/
+      edit_admin_template_path(Template.find_by_name($1))
+    when /the page for the template/ then edit_admin_template_path(@template)
 
     when /the theme page/
       admin_theme_path
-
-    when /the page for the template with the name "([^"]*)"/
-      edit_admin_template_path(Template.find_by_name($1))
-
-    when /the page for the template/
-      edit_admin_template_path(@template)
 
     else
       begin

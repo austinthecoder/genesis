@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303044357) do
+ActiveRecord::Schema.define(:version => 20110307212116) do
 
   create_table "fields", :force => true do |t|
     t.integer  "template_id"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20110303044357) do
 
   add_index "fields", ["template_id", "name"], :name => "index_fields_on_template_id_and_name", :unique => true
   add_index "fields", ["template_id"], :name => "index_fields_on_template_id"
+
+  create_table "pages", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry"
+    t.string   "slug"
+  end
+
+  add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
 
   create_table "templates", :force => true do |t|
     t.string   "name"

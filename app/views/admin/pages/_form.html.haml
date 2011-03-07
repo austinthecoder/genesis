@@ -1,0 +1,11 @@
+= simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
+  = f.input :title
+  - if f.object.slug_editable?
+    = f.input :slug, :label => 'Permalink'
+  - else
+    = f.label :permalink
+    %p
+      = "/"
+
+  %button{:type => 'submit'}
+    Save

@@ -38,6 +38,8 @@ GEM
       activesupport (= 3.0.4)
     activesupport (3.0.4)
     addressable (2.2.4)
+    ancestry (1.2.3)
+      activerecord (>= 2.2.2)
     arel (2.0.8)
     attribute_normalizer (0.3.1)
     basic_tree (1.0.0)
@@ -171,6 +173,7 @@ PLATFORMS
 
 DEPENDENCIES
   accept_values_for (= 0.3.1)!
+  ancestry (= 1.2.3)
   attribute_normalizer (= 0.3.1)
   basic_tree (= 1.0.0)
   capybara (= 0.4.1.2)

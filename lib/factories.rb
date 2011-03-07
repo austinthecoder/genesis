@@ -18,4 +18,8 @@ FactoryGirl.define do
     field_type Field::TYPE_OPTIONS.keys[0]
     template
   end
+
+  factory :page do
+    user
+  end
 end
