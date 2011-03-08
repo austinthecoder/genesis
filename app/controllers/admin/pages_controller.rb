@@ -11,8 +11,9 @@ class Admin::PagesController < AdminController
 
   def create
     @page.save!
-    flash[:notice] = "Page was added."
-    redirect_to admin_pages_url
+    redirect_to admin_pages_url, :notice => "Page was added."
+  rescue ActiveRecord::RecordInvalid
+    render :new
   end
 
   def edit

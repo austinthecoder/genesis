@@ -2,20 +2,17 @@ module ScopeHelpers
   def scope_to(scope_str)
     case scope_str
 
-    when "the fields table"
-      "table.fields"
+    when "the fields table" then "table.fields"
 
-    when "the sidebar"
-      "#sidebar"
+    when "the sidebar" then "#sidebar"
 
-    when "the templates"
-      ".templates"
+    when "the templates" then ".templates"
 
-    when "the template form"
-      "form.template"
+    when "the template form" then "form.template"
 
-    when "the name input"
-      ".name.input"
+    when "the name input" then ".name.input"
+    when "the title input" then ".title.input"
+    when "the permalink input" then ".slug.input"
 
     when "the list of pages" then ".pages"
     when /the page with the title "([^"]*)"/

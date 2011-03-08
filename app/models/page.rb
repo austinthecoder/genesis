@@ -9,8 +9,11 @@ class Page < ActiveRecord::Base
   normalize_attributes :slug
 
   ### validations ###
-  validates :slug, :inclusion => {:in => [nil], :if => :is_root?}
+  validates :slug,
+    :presence => {:unless => :is_root?},
+    :inclusion => {:in => [nil], :if => :is_root?}
   validates :user_id, :presence => true
+  validates :title, :presence => true
 
   def slug_editable?
     !is_root?

@@ -10,7 +10,7 @@ describe Page do
     end
 
     context "when it is not root" do
-      before { subject.update_attributes!(:parent => Factory(:page)) }
+      before { subject.update_attributes!(:parent => Factory(:page), :slug => 'myslug') }
 
       it { should be_slug_editable }
     end

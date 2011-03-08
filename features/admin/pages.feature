@@ -9,6 +9,9 @@ Feature: Pages
     And I follow "Add the Home page"
     Then I should see "Permalink /"
 
+    When I press "Save"
+    Then I should see "can't be blank" within the title input
+
     When I fill in "Title" with "Home"
     And I press "Save"
     Then I should see "Page was added."
@@ -21,9 +24,11 @@ Feature: Pages
     Then I should not see "Add the Home page"
 
     When I follow "add subpage" within the page with the title "Home"
-    And I fill in the following:
-      | Title     | About       |
-      | Permalink | our-company |
+    And I fill in "Title" with "About"
+    And I press "Save"
+    Then I should see "can't be blank" within the permalink input
+
+    When I fill in "Permalink" with "about"
     And I press "Save"
     Then I should see "Page was added."
 

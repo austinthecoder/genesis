@@ -1,7 +1,7 @@
 = simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
-  = f.input :title
+  = f.input :title, :wrapper_html => {:class => 'title'}
   - if f.object.slug_editable?
-    = f.input :slug, :label => 'Permalink'
+    = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
   - else
     = f.label :permalink
     %p

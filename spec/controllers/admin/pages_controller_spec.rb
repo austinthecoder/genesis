@@ -22,7 +22,12 @@ describe Admin::PagesController do
       pages = [2, 1, 3].map do |i|
         p = Factory(:page, :user => @user, :created_at => i.minutes.ago)
         [2, 1, 3].map do |j|
-          Factory(:page, :user => @user, :created_at => j.minutes.ago, :parent => p)
+          Factory(:page,
+            :user => @user,
+            :created_at => j.minutes.ago,
+            :parent => p,
+            :slug => 'myslug'
+          )
         end
       end
       get :index, @params
@@ -115,7 +120,23 @@ describe Admin::PagesController do
           it { response.should redirect_to(admin_pages_url) }
         end
 
-        context "with invalid page params"
+        context "with invalid page params" do
+          before do
+            @page_count = Page.count
+            @params[:page] = {}
+            post :create, @params
+          end
+
+          it "assigns the parent page" do
+            assigns(:parent_page).should eq(@page)
+          end
+
+          it "does not create a page" do
+            Page.count.should eq(@page_count)
+          end
+
+          it { response.should render_template(:new) }
+        end
       end
 
       context "when the page_id does not belong to a page for the user"

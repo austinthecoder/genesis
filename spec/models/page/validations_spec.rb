@@ -8,10 +8,18 @@ describe Page, 'validations' do
     it { should be_valid }
 
     it { should_not accept_values_for(:user_id, nil) }
+    it { should_not accept_values_for(:title, '', '  ', nil) }
 
-    it "slug must be blank for root page" do
-      should_not accept_values_for(:slug, "myslug")
-      should accept_values_for(:slug, '', '  ', nil)
+    context "when it is a root page" do
+      it { should_not accept_values_for(:slug, "myslug") }
+      it { should accept_values_for(:slug, '', '  ', nil) }
+    end
+
+    context "when it is a sub-page" do
+      before { subject.parent = Factory(:page) }
+
+      it { should_not accept_values_for(:slug, '', '  ', nil) }
+      it { should accept_values_for(:slug, "myslug") }
     end
 
     # user_id must match parent on update
