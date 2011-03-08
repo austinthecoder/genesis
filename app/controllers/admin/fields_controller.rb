@@ -48,8 +48,4 @@ class Admin::FieldsController < AdminController
     @tpl.fields
   end
 
-  def render_not_found
-    render 'admin/shared/not_found', :status => 404
-  end
-
 end

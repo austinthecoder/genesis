@@ -11,6 +11,8 @@ describe Admin::PagesController do
     @params = HashWithIndifferentAccess.new
   end
 
+##################################################
+
   describe "GET index" do
     it "renders the index template" do
       get :index, @params
@@ -35,15 +37,40 @@ describe Admin::PagesController do
     end
   end
 
+##################################################
+
+  {
+    :get => :new,
+    :post => :create
+  }.each do |http_method, action|
+    describe "#{http_method.upcase} #{action}" do
+      context "with a page_id present" do
+        before do
+          @page = Factory(:page, :user => @user)
+          @params[:page_id] = @page.id
+        end
+
+        context "when the page_id belongs to a page for the user" do
+          it "assigns parent_page from the page_id" do
+            send(http_method, action, @params)
+            assigns(:parent_page).should eq(@page)
+          end
+        end
+      end
+    end
+  end
+
+##################################################
+
   describe "GET new" do
     context "with no page_id present" do
       before { get :new, @params }
 
-      it { response.should render_template(:new) }
-
       it "assigns a new page for the current user" do
         assigns(:page).attributes.should eq(controller.current_user.pages.new.attributes)
       end
+
+      it { response.should render_template(:new) }
     end
 
     context "with a page_id present" do
@@ -55,10 +82,6 @@ describe Admin::PagesController do
       context "when the page_id belongs to a page for the user" do
         before { get :new, @params }
 
-        it "assigns the parent page" do
-          assigns(:parent_page).should eq(@page)
-        end
-
         it "assigns a new page under that page" do
           assigns(:page).attributes.should eq(@page.children.new.attributes.merge("user_id" => @user.id))
         end
@@ -66,9 +89,19 @@ describe Admin::PagesController do
         it { response.should render_template(:new) }
       end
 
-      context "when the page_id does not belong to a page for the user"
+      context "when the page_id does not belong to a page for the user" do
+        before do
+          @params[:page_id] = 4523709
+          get :new, @params
+        end
+
+        it { response.code.should eq("404") }
+        it { response.should render_template("admin/shared/not_found") }
+      end
     end
   end
+
+##################################################
 
   describe "POST create" do
     context "with no page_id present" do
@@ -87,7 +120,19 @@ describe Admin::PagesController do
         it { response.should redirect_to(admin_pages_url) }
       end
 
-      context "with invalid page params"
+      context "with invalid page params" do
+        before do
+          @page_count = Page.count
+          @params[:page] = {}
+          post :create, @params
+        end
+
+        it "does not create a page" do
+          Page.count.should eq(@page_count)
+        end
+
+        it { response.should render_template(:new) }
+      end
     end
 
     context "with a page_id present" do
@@ -101,10 +146,6 @@ describe Admin::PagesController do
           before do
             @params[:page] = {:title => "My Subpage", :slug => 'myslug'}
             post :create, @params
-          end
-
-          it "assigns the parent page" do
-            assigns(:parent_page).should eq(@page)
           end
 
           it "creates a subpage under that page from the params" do
@@ -127,10 +168,6 @@ describe Admin::PagesController do
             post :create, @params
           end
 
-          it "assigns the parent page" do
-            assigns(:parent_page).should eq(@page)
-          end
-
           it "does not create a page" do
             Page.count.should eq(@page_count)
           end
@@ -139,9 +176,20 @@ describe Admin::PagesController do
         end
       end
 
-      context "when the page_id does not belong to a page for the user"
+      context "when the page_id does not belong to a page for the user" do
+        before do
+          @page = Factory(:page, :user => @user)
+          @params[:page_id] = 5479032
+          post :create, @params
+        end
+
+        it { response.code.should eq("404") }
+        it { response.should render_template("admin/shared/not_found") }
+      end
     end
   end
+
+##################################################
 
   describe "member actions" do
     before do

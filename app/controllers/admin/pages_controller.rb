@@ -3,7 +3,7 @@ class Admin::PagesController < AdminController
   before_filter :build_page, :only => %w(new create)
 
   def index
-    @arranged_pages = current_user.pages.arrange
+    @arranged_pages = pages_scope.arrange
   end
 
   def new
@@ -17,15 +17,19 @@ class Admin::PagesController < AdminController
   end
 
   def edit
-    @page = current_user.pages.find(params[:id])
+    @page = pages_scope.find(params[:id])
   end
 
   private
 
+  def pages_scope
+    current_user.pages
+  end
+
   def build_page
-    @page = current_user.pages.new(params[:page])
+    @page = pages_scope.new(params[:page])
     if params[:page_id]
-      @parent_page = current_user.pages.find(params[:page_id])
+      @parent_page = pages_scope.find(params[:page_id])
       @page.parent = @parent_page
     end
   end

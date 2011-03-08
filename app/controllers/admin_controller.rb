@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+
   before_filter :authenticate_user!
 
   private
@@ -10,6 +12,10 @@ class AdminController < ApplicationController
 
   def templates_scope
     current_user.templates
+  end
+
+  def render_not_found
+    render 'admin/shared/not_found', :status => 404
   end
 
 end
