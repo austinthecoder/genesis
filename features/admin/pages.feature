@@ -28,6 +28,10 @@ Feature: Pages
     And I press "Save"
     Then I should see "can't be blank" within the permalink input
 
+    When I fill in "Permalink" with "about/us"
+    And I press "Save"
+    Then I should see "is invalid" within the permalink input
+
     When I fill in "Permalink" with "about"
     And I press "Save"
     Then I should see "Page was added."

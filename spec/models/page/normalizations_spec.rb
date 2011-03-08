@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Page, "normalizations" do
 
-  it { should normalize_attribute(:slug) }
+  [:title, :slug].each do |a|
+    it { should normalize_attribute(a) }
+  end
 
 end
