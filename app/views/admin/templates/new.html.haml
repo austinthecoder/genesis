@@ -1,4 +1,10 @@
-= render 'form'
+.section
+  %h2
+    = link_to "Theme", admin_theme_path
+    >
+    New Template
+
+  = render 'form'
 
 = content_for :sidebar do
   = render 'list'

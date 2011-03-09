@@ -1,0 +1,32 @@
+form {
+  .input {
+    padding-right: 8px;
+    margin-bottom: 15px;
+
+    input {
+      display: block;
+      width: 100%;
+    }
+    label {
+      display: block;
+    }
+    textarea {
+      display: block;
+      width: 100%;
+    }
+
+    .error {
+      color: #fff;
+      display: block;
+      font-weight: bold;
+    }
+  }
+  .input.field_with_errors {
+    background: $error_color;
+    padding: 5px 23px 5px 15px;
+  }
+
+  .footer {
+    margin-top: 30px;
+  }
+}

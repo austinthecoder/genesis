@@ -9,7 +9,7 @@
     #menu
       %ul
         %li= link_to "Pages", admin_pages_path
-        %li= link_to "Theme", admin_theme_path
+        %li.active= link_to "Theme", admin_theme_path
         %li= link_to 'Sign out', destroy_user_session_path
         -# main_menu.each do |title, path|
           %li=# link_to title, path
@@ -17,10 +17,12 @@
     #content
       #main
         #main_inner
-          - if flash.notice
-            .flash.notice= raw(flash.notice)
-          - if flash.alert
-            .flash.alert= raw(flash.alert)
+          - if flash.notice || flash.alert
+            #flash
+              - if flash.notice
+                .notice= raw(flash.notice)
+              - if flash.alert
+                .alert= raw(flash.alert)
           = yield
       #sidebar
         #sidebar_inner

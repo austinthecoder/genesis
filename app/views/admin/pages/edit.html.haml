@@ -1,1 +1,6 @@
-= render 'form'
+.section
+  %h2
+    = link_to "Pages", admin_pages_path
+    >
+    = @page.title
+  = render 'form'

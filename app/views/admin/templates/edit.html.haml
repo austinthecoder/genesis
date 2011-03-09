@@ -1,6 +1,12 @@
-%p= link_to "template data", admin_template_fields_path(@tpl)
+.section
+  %h2
+    = link_to "Theme", admin_theme_path
+    > Templates >
+    = @tpl.name
 
-= render 'form'
+  %p= link_to "template data", admin_template_fields_path(@tpl)
 
-= content_for :sidebar do
-  = render 'list'
+  = render 'form'
+
+  = content_for :sidebar do
+    = render 'list'

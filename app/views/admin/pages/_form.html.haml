@@ -1,22 +1,22 @@
-.section
-  = simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
-    = f.input :title, :wrapper_html => {:class => 'title'}
+= simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
+  = f.input :title, :wrapper_html => {:class => 'title'}
 
-    - if f.object.slug_editable?
-      = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
-    - else
-      = f.label :permalink
-      %p
-        = "/"
+  - if f.object.slug_editable?
+    = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
+  - else
+    = f.label :permalink
+    %p
+      = "/"
 
-    - if f.object.new_record?
-      = f.association :template
-    - else
-      = f.simple_fields_for :contents do |cf|
-        - field = cf.object.field
-        = cf.input :body,
-          :label => field.name.titleize,
-          :as => (field.field_type == 'short_text' ? :string : (:text if field.field_type == 'long_text'))
+  - if f.object.new_record?
+    = f.association :template
+  - else
+    = f.simple_fields_for :contents do |cf|
+      - field = cf.object.field
+      = cf.input :body,
+        :label => field.name.titleize,
+        :as => (field.field_type == 'short_text' ? :string : (:text if field.field_type == 'long_text'))
 
+  .footer
     %button{:type => 'submit'}
       Save

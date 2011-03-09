@@ -1,73 +1,84 @@
+$images_path: '/images';
+$error_color: #903030;
+$success_color: #6060ff;
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 @import "reset";
 @import "base";
+@import "buttons";
+@import "forms";
 @import "compass/css3";
-
-
 
 //////////////////////////////////////////////////
 
 body {
-
+  background: #303030;
+  color: #fff;
+  font-family: "Droid Sans", Helvetica, sans-serif;
 }
 
-a { text-decoration: none; }
+a {
+  color: #ccf;
+  text-decoration: none;
+}
 
+h1, h2, h3 {
+  font-weight: normal;
+}
 
 //////////////////////////////////////////////////
 
-.flash {
-  color: #fff;
-  margin-bottom: 20px;
-  padding: 2px 10px;
-}
+#flash {
+  padding: 20px 20px 0 20px;
 
-.notice {
-  background: #66f;
-}
-
-.alert {
-  background: #600;
+  .notice, .alert {
+    color: #fff;
+    padding: 2px 10px;
+  }
+  .notice { background: $success_color; }
+  .alert { background: $error_color; }
 }
 
 .section {
-  background: #eee;
   border-bottom: 1px solid #ddd;
-  padding: 20px;
+  padding: 20px 30px;
 }
 
-form {
-  .input {
-    padding-right: 8px;
-    margin-bottom: 10px;
+.pages {
+  .actions {
+    float: right;
   }
-
-  input {
-    width: 100%;
-  }
-  label { display: block; }
-  textarea { width: 100%; }
 }
 
 //////////////////////////////////////////////////
 
 #menu {
-  background: #eee;
-  padding: 20px 30px;
+  background: #202020 url($images_path + '/inset-shadow-bottom.png') repeat-x left bottom;
 
+  a {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    line-height: 35px;
+    padding: 0 30px;
+  }
   ul { margin: 0; }
-
   li {
     list-style: none;
     float: left;
-    margin-right: 30px;
+    text-transform: upcase;
+  }
+  li.active {
+    background: url($images_path + '/inset-shadow-left.png') repeat-y right top;
+    border-left: 1px solid #3a3a3a;
+    padding-right: 4px;
+
+    a { background: #303030; }
   }
 }
 
 #content {
-  background: #ddd;
-
   #main {
-    background: #fff;
     float: left;
     width: 70%;
 
@@ -83,6 +94,5 @@ form {
 }
 
 #footer {
-  background: #eee;
   padding: 20px 30px;
 }
