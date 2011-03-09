@@ -24,4 +24,13 @@ class Field < ActiveRecord::Base
     TYPE_OPTIONS[self[:field_type]]
   end
 
+  ### callbacks ###
+  after_create do
+    if template
+      template.pages.each do |p|
+        Content.create!(:page => p, :field => self)
+      end
+    end
+  end
+
 end

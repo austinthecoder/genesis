@@ -20,7 +20,7 @@ describe Admin::VersionsController do
     context "when the id matches a version of the 'Field' item_type and 'destroy' event" do
       before { post :revert, :id => @version.id }
 
-      it { flash[:notice].should eq("Field was added back.") }
+      it { flash.notice.should eq("Field was added back.") }
       it { response.should redirect_to(admin_template_fields_url(@tpl)) }
 
       it "restores the field" do

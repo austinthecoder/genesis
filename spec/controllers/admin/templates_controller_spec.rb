@@ -48,7 +48,7 @@ describe Admin::TemplatesController do
         post :create, @params
       end
 
-      it { flash[:notice].should eq("Wowza weeza! Template was created!") }
+      it { flash.notice.should eq("Wowza weeza! Template was created!") }
 
       it "creates a template for the current user" do
         controller.current_user.templates.count.should eq(@user_tpls.size + 1)
@@ -71,7 +71,7 @@ describe Admin::TemplatesController do
         post :create
       end
 
-      it { flash[:alert].should eq("Houston, we have some problems.") }
+      it { flash.alert.should eq("Houston, we have some problems.") }
       it { response.should render_template(:new) }
 
       it "doesn't create a template" do
@@ -141,7 +141,7 @@ describe Admin::TemplatesController do
             put :update, @params
           end
 
-          it { flash[:alert].should eq("Houston, we have some problems.") }
+          it { flash.alert.should eq("Houston, we have some problems.") }
           it { response.should render_template(:edit) }
 
           it "does not update the template" do

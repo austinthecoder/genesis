@@ -69,7 +69,7 @@ describe Admin::FieldsController do
         @params[:field].each { |k, v| assigns(:tpl).fields[0].send(k).should eq(v) }
       end
 
-      it { flash[:notice].should eq("Kablam! Added!") }
+      it { flash.notice.should eq("Kablam! Added!") }
       it { response.should redirect_to(admin_template_fields_url(assigns(:tpl))) }
     end
 
@@ -77,7 +77,7 @@ describe Admin::FieldsController do
       before { post :create, @params }
 
       it { Field.count.should eq(0) }
-      it { flash[:alert].should eq("Dag nabbit. There were some problems.") }
+      it { flash.alert.should eq("Dag nabbit. There were some problems.") }
       it { response.should render_template(:index) }
     end
   end
@@ -101,7 +101,7 @@ describe Admin::FieldsController do
         it "sets a notice with an undo link" do
           path = revert_admin_version_path(@field.versions.scoped.last)
           undo_button = controller.view_context.button_to("Undo", path)
-          flash[:notice].should eq("Field was removed. #{undo_button}")
+          flash.notice.should eq("Field was removed. #{undo_button}")
         end
 
         it { response.should redirect_to(admin_template_fields_url(@tpl)) }

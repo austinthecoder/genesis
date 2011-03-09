@@ -14,6 +14,8 @@ module ScopeHelpers
     when "the title input" then ".title.input"
     when "the permalink input" then ".slug.input"
 
+    when "the form" then "form"
+
     when "the list of pages" then ".pages"
     when /the page with the title "([^"]*)"/
       page = Page.find_by_title($1)

@@ -4,6 +4,10 @@ class Page < ActiveRecord::Base
 
   ### associations ###
   belongs_to :user
+  belongs_to :template
+  has_many :contents
+
+  accepts_nested_attributes_for :contents
 
   ### normalizations ###
   normalize_attributes :slug, :title

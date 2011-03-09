@@ -17,7 +17,7 @@ class Admin::FieldsController < AdminController
     @field.save!
     redirect_to admin_template_fields_url(@tpl), :notice => "Kablam! Added!"
   rescue ActiveRecord::RecordInvalid
-    flash[:alert] = "Dag nabbit. There were some problems."
+    flash.alert = "Dag nabbit. There were some problems."
     render :index
   end
 

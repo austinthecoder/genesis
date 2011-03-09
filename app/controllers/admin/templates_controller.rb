@@ -8,24 +8,23 @@ class Admin::TemplatesController < AdminController
   end
 
   def create
-    if @tpl.save
-      redirect_to edit_admin_template_url(@tpl), :notice => "Wowza weeza! Template was created!"
-    else
-      flash.alert = "Houston, we have some problems."
-      render :new
-    end
+    @tpl.save!
+    redirect_to edit_admin_template_url(@tpl), :notice => "Wowza weeza! Template was created!"
+  rescue ActiveRecord::RecordInvalid
+    flash.alert = "Houston, we have some problems."
+    render :new
   end
 
   def edit
   end
 
   def update
-    if @tpl.update_attributes(params[:template])
-      redirect_to edit_admin_template_url(@tpl)
-    else
-      flash.alert = "Houston, we have some problems."
-      render :edit
-    end
+    @tpl.update_attributes!(params[:template])
+    # TODO: set a notice
+    redirect_to edit_admin_template_url(@tpl)
+  rescue ActiveRecord::RecordInvalid
+    flash.alert = "Houston, we have some problems."
+    render :edit
   end
 
   private

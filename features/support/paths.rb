@@ -23,6 +23,11 @@ module NavigationHelpers
     when /the theme page/
       admin_theme_path
 
+    # pages
+    when "the page for that page"
+      page = Page.order('id ASC').first
+      edit_admin_page_path(page)
+
     else
       begin
         page_name =~ /the (.*) page/

@@ -107,17 +107,20 @@ describe Admin::PagesController do
     context "with no page_id present" do
       context "with valid page params" do
         before do
+          @nbr_pages = controller.current_user.pages.size
           @params[:page] = {:title => "My Page"}
           post :create, @params
+          @user.reload
+          @newest_page = @user.pages.order('id ASC').first
         end
 
         it "creates a page for the user from the params" do
-          controller.current_user.pages.size.should eq(1)
-          controller.current_user.pages.first.title.should eq("My Page")
+          @user.pages.size.should eq(@nbr_pages + 1)
+          @newest_page.title.should eq("My Page")
         end
 
-        it { flash[:notice].should eq("Page was added.") }
-        it { response.should redirect_to(admin_pages_url) }
+        it { flash.notice.should eq("Page was saved.") }
+        it { response.should redirect_to(edit_admin_page_url(@newest_page)) }
       end
 
       context "with invalid page params" do
@@ -144,21 +147,21 @@ describe Admin::PagesController do
       context "when the page_id belongs to a page for the user" do
         context "with valid page params" do
           before do
+            @nbr_pages = @page.children.size
             @params[:page] = {:title => "My Subpage", :slug => 'myslug'}
             post :create, @params
+            @page.reload
+            @newest_child = @page.children.order('id ASC').first
           end
 
           it "creates a subpage under that page from the params" do
-            @page.reload
-            @page.children.size.should eq(1)
-            @page.children.first.tap do |p|
-              p.title.should eq("My Subpage")
-              p.slug.should eq("myslug")
-              p.user_id.should eq(@user.id)
-            end
+            @page.children.size.should eq(@nbr_pages + 1)
+            @newest_child.title.should eq("My Subpage")
+            @newest_child.slug.should eq("myslug")
+            @newest_child.user_id.should eq(@user.id)
           end
 
-          it { response.should redirect_to(admin_pages_url) }
+          it { response.should redirect_to(edit_admin_page_url(@newest_child)) }
         end
 
         context "with invalid page params" do
@@ -197,13 +200,53 @@ describe Admin::PagesController do
       @params[:id] = @page.id
     end
 
+    {
+      :get => :edit,
+      :put => :update
+    }.each do |http_method, action|
+      describe "#{http_method.upcase} #{action}" do
+        it "assigns the page" do
+          send(http_method, action, @params)
+          assigns(:page).should eq(@page)
+        end
+      end
+    end
+
     describe "GET edit" do
       before { get :edit, @params }
 
       it { response.should render_template(:edit) }
+    end
 
-      it "assigns the page" do
-        assigns(:page).should eq(@page)
+    describe "PUT update" do
+      context "with valid page params" do
+        before { @params[:page] = {:title => 'My Page'} }
+
+        it "updates the page from the params" do
+          page = mock_model(Page)
+          controller.current_user.pages.stub!(:find => page)
+          page.should_receive(:update_attributes!).with(@params[:page])
+          put :update, @params
+        end
+
+        it "sets a flash notice" do
+          put :update, @params
+          flash.notice.should eq("Page was saved.")
+        end
+
+        it "redirects to the edit page" do
+          put :update, @params
+          response.should redirect_to(edit_admin_page_url(@page))
+        end
+      end
+
+      context "with invalid page params" do
+        before do
+          @params[:page] = {:title => ''}
+          put :update, @params
+        end
+
+        it { response.should render_template(:edit) }
       end
     end
   end

@@ -1,6 +1,7 @@
 class Admin::PagesController < AdminController
 
   before_filter :build_page, :only => %w(new create)
+  before_filter :find_page, :only => %w(edit update)
 
   def index
     @arranged_pages = pages_scope.arrange
@@ -11,16 +12,26 @@ class Admin::PagesController < AdminController
 
   def create
     @page.save!
-    redirect_to admin_pages_url, :notice => "Page was added."
+    redirect_to edit_admin_page_url(@page), :notice => "Page was saved."
   rescue ActiveRecord::RecordInvalid
     render :new
   end
 
   def edit
-    @page = pages_scope.find(params[:id])
+  end
+
+  def update
+    @page.update_attributes!(params[:page])
+    redirect_to edit_admin_page_url(@page), :notice => "Page was saved."
+  rescue ActiveRecord::RecordInvalid
+    render :edit
   end
 
   private
+
+  def find_page
+    @page = pages_scope.find(params[:id])
+  end
 
   def pages_scope
     current_user.pages

@@ -9,7 +9,7 @@ Genesis::Application.routes.draw do
       member { post :revert }
     end
 
-    resources :pages, :only => %w(index new create show edit) do
+    resources :pages, :only => %w(index new create show edit update) do
       resources :pages, :only => %w(new create)
     end
 
