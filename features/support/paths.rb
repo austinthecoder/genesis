@@ -27,6 +27,8 @@ module NavigationHelpers
     when "the page for that page"
       page = Page.order('id ASC').first
       edit_admin_page_path(page)
+    when /the page for the "([^"]*)" page/
+      edit_admin_page_path(Page.find_by_title($1))
 
     else
       begin

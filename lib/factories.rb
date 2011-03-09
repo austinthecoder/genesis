@@ -23,4 +23,7 @@ FactoryGirl.define do
     user
     title 'My Page'
   end
+
+  factory :content do
+  end
 end

@@ -16,6 +16,15 @@ When /^fields are added to (that template) with the attributes:$/ do |tpl, table
   end
 end
 
+When /^I remove the "([^"]*)" field for the "([^"]*)" template$/ do |field_name, template_name|
+  steps %{
+    When I follow "Theme"
+    And I follow "#{template_name}"
+    And I follow "template data"
+    And I press "remove" within the row for the field with the name "#{field_name}"
+  }
+end
+
 ##################################################
 
 Then /^I should see the fields table, which looks like:$/ do |expected_table|

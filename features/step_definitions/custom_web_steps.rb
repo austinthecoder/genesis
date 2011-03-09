@@ -19,3 +19,7 @@ Then /^I should not see each of the following:$/ do |table|
     page.should have_no_content(text)
   end
 end
+
+Then /^I should not see the "([^"]*)" field$/ do |field|
+  lambda { find_field(field) }.should raise_error(Capybara::ElementNotFound)
+end

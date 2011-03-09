@@ -30,4 +30,27 @@ describe Field, 'callbacks' do
     end
   end
 
+  describe "after destroying" do
+    subject { Factory(:field) }
+
+    before do
+      @non_field_contents = (1..2).map { Factory(:content) }
+      @field_contents = (1..2).map { Factory(:content, :field => subject) }
+    end
+
+    it "destroys it's contents" do
+      subject.destroy
+      @field_contents.each do |c|
+        lambda { c.reload }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    it "does not destroy any other contents" do
+      subject.destroy
+      @non_field_contents.each do |c|
+        lambda { c.reload }.should_not raise_error
+      end
+    end
+  end
+
 end

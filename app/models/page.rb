@@ -5,7 +5,7 @@ class Page < ActiveRecord::Base
   ### associations ###
   belongs_to :user
   belongs_to :template
-  has_many :contents
+  has_many :contents, :dependent => :destroy
 
   accepts_nested_attributes_for :contents
 

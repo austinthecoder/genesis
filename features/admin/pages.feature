@@ -54,7 +54,7 @@ Feature: Pages
     And I select "Home" from "Template"
     And I press "Save"
     Then I should see "Page was saved"
-    And I should not see "Template" within the form
+    Then I should not see the "Template" field
 
     When fields are added to that template with the attributes:
       | Name   | Type       |
@@ -65,3 +65,7 @@ Feature: Pages
     And I fill in "Footer" with "this is the footer"
     And I press "Save"
     Then I should see "Page was saved"
+
+    When I remove the "Body" field for the "Home" template
+    And I go to the page for the "Homepage" page
+    Then I should not see the "Body" field

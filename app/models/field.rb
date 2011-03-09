@@ -9,6 +9,8 @@ class Field < ActiveRecord::Base
 
   ### associations ###
   belongs_to :template
+  has_many :pages, :through => :template
+  has_many :contents, :dependent => :destroy
 
   ### normalizations ###
   normalize_attributes :name
@@ -20,17 +22,13 @@ class Field < ActiveRecord::Base
     :presence => true,
     :uniqueness => {:scope => :template_id}
 
-  def human_field_type
-    TYPE_OPTIONS[self[:field_type]]
-  end
-
   ### callbacks ###
   after_create do
-    if template
-      template.pages.each do |p|
-        Content.create!(:page => p, :field => self)
-      end
-    end
+    pages.each { |p| contents.create!(:page => p) }
+  end
+
+  def human_field_type
+    TYPE_OPTIONS[self[:field_type]]
   end
 
 end
