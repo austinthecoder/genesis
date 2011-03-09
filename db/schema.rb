@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308233346) do
+ActiveRecord::Schema.define(:version => 20110309214227) do
 
   create_table "contents", :force => true do |t|
     t.integer  "page_id"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(:version => 20110308233346) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "contents", ["field_id"], :name => "index_contents_on_field_id"
+  add_index "contents", ["page_id", "field_id"], :name => "index_contents_on_page_id_and_field_id", :unique => true
+  add_index "contents", ["page_id"], :name => "index_contents_on_page_id"
 
   create_table "fields", :force => true do |t|
     t.integer  "template_id"

@@ -3,12 +3,13 @@ Feature: Creating Templates
   Background:
     Given a user
     And I am signed in as that user
-    And I am on the template creation page
+    And I follow "Theme"
 
 ##################################################
 
   Scenario: Simple
-    When I fill in "Name" with "Home"
+    When I follow "Add a template"
+    And I fill in "Name" with "Home"
     And I fill in the template's content with "some content"
     And I press "Save this template"
     Then I should see "Wowza weeza! Template was created!"
@@ -17,7 +18,8 @@ Feature: Creating Templates
 ##################################################
 
   Scenario: Making sure name isn't blank
-    When I press "Save this template"
+    When I follow "Add a template"
+    And I press "Save this template"
     Then I should see "Houston, we have some problems."
     And I should see "can't be blank" within the name input within the template form
 
@@ -34,11 +36,13 @@ Feature: Creating Templates
     Given another user
     And a template for the other user named "Home"
 
-    When I fill in "Name" with "Home"
+    When I follow "Add a template"
+    And I fill in "Name" with "Home"
     And I press "Save this template"
     Then I should see "Wowza weeza! Template was created!"
 
-    When I go to the template creation page
+    When I follow "Theme"
+    And I follow "Add a template"
     And I fill in "Name" with "Home"
     And I press "Save this template"
     Then I should see "Houston, we have some problems."
@@ -47,7 +51,8 @@ Feature: Creating Templates
 ##################################################
 
   Scenario: Continual editing
-    When I fill in "Name" with "Home"
+    When I follow "Add a template"
+    And I fill in "Name" with "Home"
     And I fill in the template's content with "some content"
     And I press "Save this template"
     Then the "Name" field should contain "Home"
@@ -84,7 +89,7 @@ Feature: Creating Templates
 
     When I sign out
     And I sign in as the user with the email "john@example.com"
-    And I go to the theme page
+    And I follow "Theme"
     Then I should see each of the following within the templates:
       | Tpl1 |
       | Tpl2 |
@@ -93,7 +98,8 @@ Feature: Creating Templates
       | Tpl4 |
       | Tpl5 |
 
-    When I go to the template creation page
+    When I follow "Theme"
+    And I follow "Add a template"
     Then I should see each of the following within the templates within the sidebar:
       | Tpl1 |
       | Tpl2 |
@@ -111,7 +117,8 @@ Feature: Creating Templates
       | Tpl4 |
       | Tpl5 |
 
-    When I go to the page for the template with the name "Tpl1"
+    When I follow "Theme"
+    And I follow "Tpl1"
     Then I should see each of the following within the templates within the sidebar:
       | Tpl1 |
       | Tpl2 |
@@ -129,3 +136,7 @@ Feature: Creating Templates
       | Tpl3 |
       | Tpl4 |
       | Tpl5 |
+
+##################################################
+
+  Scenario: Removing

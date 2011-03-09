@@ -60,12 +60,13 @@ Feature: Pages
       | Name   | Type       |
       | Body   | long text  |
       | Footer | short text |
-    And I go to the page for that page
+    And I follow "Pages"
+    And I follow "Homepage"
     And I fill in "Body" with "this is the body"
     And I fill in "Footer" with "this is the footer"
     And I press "Save"
     Then I should see "Page was saved"
 
     When I remove the "Body" field for the "Home" template
-    And I go to the page for the "Homepage" page
+    And I follow "Pages" then "Homepage"
     Then I should not see the "Body" field

@@ -8,37 +8,21 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /the home\s?page/
-      '/'
-
-    when /the admin sign-in page/
-      new_user_session_path
-
-    # templates
-    when /the template creation page/ then new_admin_template_path
-    when /the page for the template with the name "([^"]*)"/
-      edit_admin_template_path(Template.find_by_name($1))
-    when /the page for the template/ then edit_admin_template_path(@template)
-
-    when /the theme page/
-      admin_theme_path
-
-    # pages
-    when "the page for that page"
-      page = Page.order('id ASC').first
-      edit_admin_page_path(page)
-    when /the page for the "([^"]*)" page/
-      edit_admin_page_path(Page.find_by_title($1))
+    when /the admin sign-in page/ then new_user_session_path
 
     else
-      begin
-        page_name =~ /the (.*) page/
-        path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
-      rescue Object => e
-        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-          "Now, go and add a mapping in #{__FILE__}"
-      end
+      raise <<-EOS.strip_heredoc
+        Can't find mapping from "#{page_name}" to a path.
+        Now, go and add a mapping in #{__FILE__}
+      EOS
+      # begin
+      #   page_name =~ /the (.*) page/
+      #   path_components = $1.split(/\s+/)
+      #   self.send(path_components.push('path').join('_').to_sym)
+      # rescue Object => e
+      #   raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
+      #     "Now, go and add a mapping in #{__FILE__}"
+      # end
     end
   end
 end

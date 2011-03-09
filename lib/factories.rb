@@ -25,5 +25,7 @@ FactoryGirl.define do
   end
 
   factory :content do
+    page
+    field
   end
 end

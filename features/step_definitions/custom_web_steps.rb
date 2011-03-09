@@ -6,6 +6,10 @@ When /^(.+) within ([^:]+)$/ do |step, scope_str|
   with_scope(scope_to(scope_str)) { When step }
 end
 
+When /^I follow "([^"]*)" then "([^"]*)"$/ do |*links|
+  links.each { |l| click_link(l) }
+end
+
 ##################################################
 
 Then /^I should see each of the following:$/ do |table|

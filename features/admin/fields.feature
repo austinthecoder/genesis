@@ -8,7 +8,8 @@ Feature: Template Fields
 ##################################################
 
   Scenario: Viewing and adding a field
-    When I go to the page for the template
+    When I follow "Theme"
+    And I follow "Home"
     And I follow "template data"
     Then I should see the fields table, which looks like:
       | Name       | Type       |
