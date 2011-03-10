@@ -13,7 +13,7 @@ Genesis::Application.routes.draw do
       resources :pages, :only => %w(new create)
     end
 
-    resources :templates, :only => %w(show new create edit update) do
+    resources :templates, :only => %w(show new create edit update destroy) do
       resources :fields, :only => %w(index create)
     end
 

@@ -5,17 +5,23 @@
     = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
   - else
     = f.label :permalink
-    %p
-      = "/"
+    %p= "/"
 
-  - if @page.new_record?
-    = f.association :template
-  - else
-    = f.simple_fields_for :contents, @page.contents.joins(:field).includes(:field) do |cf|
-      - field = cf.object.field
-      = cf.input :body,
-        :label => field.name.titleize,
-        :as => (field.field_type == 'short_text' ? :string : (:text if field.field_type == 'long_text'))
+  - if @tpls.present?
+    - if @page.new_record?
+      = f.association :template
+    - else
+      - if @page.template
+        = f.label :template
+        %p= @page.template.name
+      - else
+        = f.association :template
+
+  = f.simple_fields_for :contents, @page.contents.active.includes(:field) do |cf|
+    - field = cf.object.field
+    = cf.input :body,
+      :label => field.name.titleize,
+      :as => (field.field_type == 'short_text' ? :string : (:text if field.field_type == 'long_text'))
 
   .footer
     %button{:type => 'submit'}

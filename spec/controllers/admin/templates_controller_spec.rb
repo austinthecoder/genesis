@@ -150,6 +150,49 @@ describe Admin::TemplatesController do
         end
       end
     end
+
+    describe "DELETE destroy" do
+      context "when the id matches a template belonging to the user" do
+        before { delete :destroy, @params }
+
+        it "destroys the template" do
+          lambda { @tpl.reload }.should raise_error(ActiveRecord::RecordNotFound)
+        end
+
+        it "sets a notice with an undo link" do
+          path = revert_admin_version_path(@tpl.versions.scoped.last)
+          undo_button = controller.view_context.button_to("Undo", path)
+          flash.notice.should eq("Template was removed. #{undo_button}")
+        end
+
+        it { response.should redirect_to(admin_theme_url) }
+      end
+
+      context "when the id matches a template not belonging to the user" do
+        before do
+          @other_template = Factory(:template)
+          @params[:id] = @other_template.id
+          delete :destroy, @params
+        end
+
+        it { response.code.should eq("404") }
+        it { response.should render_template("admin/shared/not_found") }
+
+        it "does not destroy the template" do
+          lambda { @other_template.reload }.should_not raise_error
+        end
+      end
+
+      context "when the id does not match a template for any user" do
+        before do
+          @params[:id] = 9874651
+          delete :destroy, @params
+        end
+
+        it { response.code.should eq("404") }
+        it { response.should render_template("admin/shared/not_found") }
+      end
+    end
   end
 
 end

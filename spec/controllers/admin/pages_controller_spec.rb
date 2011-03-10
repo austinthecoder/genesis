@@ -44,6 +44,15 @@ describe Admin::PagesController do
     :post => :create
   }.each do |http_method, action|
     describe "#{http_method.upcase} #{action}" do
+      it "assigns the templates for the current user (newest first)" do
+        2.times { Factory(:template) }
+        @user_tpls = [2, 3, 1].map do |i|
+          Factory(:template, :user => @user, :created_at => i.minutes.ago)
+        end
+        send(http_method, action, @params)
+        assigns(:tpls).should eq([@user_tpls[2], @user_tpls[0], @user_tpls[1]])
+      end
+
       context "with a page_id present" do
         before do
           @page = Factory(:page, :user => @user)
@@ -205,6 +214,15 @@ describe Admin::PagesController do
       :put => :update
     }.each do |http_method, action|
       describe "#{http_method.upcase} #{action}" do
+        it "assigns the templates for the current user (newest first)" do
+          2.times { Factory(:template) }
+          @user_tpls = [2, 3, 1].map do |i|
+            Factory(:template, :user => @user, :created_at => i.minutes.ago)
+          end
+          send(http_method, action, @params)
+          assigns(:tpls).should eq([@user_tpls[2], @user_tpls[0], @user_tpls[1]])
+        end
+
         it "assigns the page" do
           send(http_method, action, @params)
           assigns(:page).should eq(@page)

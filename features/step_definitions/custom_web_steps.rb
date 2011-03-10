@@ -26,6 +26,20 @@ When /^I visit the page for (that page)$/ do |page|
   }
 end
 
+When /^I visit the new page page$/ do
+  steps %{
+    When I follow:
+      | Pages | Add the Home page |
+  }
+end
+
+When /^I visit the new subpage page for (that page)$/ do |page|
+  steps %{
+    When I follow "Pages"
+    And I follow "add subpage" within the page with the title "#{page.title}"
+  }
+end
+
 ##################################################
 
 # Then /^I should see each of the following:$/ do |table|
@@ -46,4 +60,16 @@ end
 
 Then /^I should see the "([^"]*)" field$/ do |field|
   lambda { find_field(field) }.should_not raise_error
+end
+
+Then /^I should not see the fields:$/ do |table|
+  table.raw.flatten.each do |field|
+    Then %{I should not see the "#{field}" field}
+  end
+end
+
+Then /^I should see the fields:$/ do |table|
+  table.raw.flatten.each do |field|
+    Then %{I should see the "#{field}" field}
+  end
 end

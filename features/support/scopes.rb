@@ -7,8 +7,8 @@ module ScopeHelpers
     when "the sidebar" then "#sidebar"
 
     when "the templates" then ".templates"
-
     when "the template form" then "form.template"
+    when /the row for (that template)/ then ".template_#{Transform($1).id}"
 
     when "the name input" then ".name.input"
     when "the title input" then ".title.input"
@@ -21,6 +21,7 @@ module ScopeHelpers
       page = Page.find_by_title($1)
       "#page_#{page.id}"
 
+    when "the fields" then ".fields"
     when /the row for the field with the name "([^"]*)"/
       fields = Field.where(:name => $1)
       field = case fields.size

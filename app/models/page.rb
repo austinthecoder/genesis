@@ -5,7 +5,12 @@ class Page < ActiveRecord::Base
   ### associations ###
   belongs_to :user
   belongs_to :template
-  has_many :contents, :dependent => :destroy
+  has_many :contents, :dependent => :destroy do
+    # contents that have a field that have a template
+    def active
+      joins(:field => :template)
+    end
+  end
   has_many :fields, :through => :template
 
   accepts_nested_attributes_for :contents

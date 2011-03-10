@@ -2,6 +2,7 @@ class Admin::PagesController < AdminController
 
   before_filter :build_page, :only => %w(new create)
   before_filter :find_page, :only => %w(edit update)
+  before_filter :assign_templates, :only => %w(new create edit update)
 
   def index
     @arranged_pages = pages_scope.arrange

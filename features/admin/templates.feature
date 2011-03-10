@@ -41,8 +41,8 @@ Feature: Creating Templates
     And I press "Save this template"
     Then I should see "Wowza weeza! Template was created!"
 
-    When I follow "Theme"
-    And I follow "Add a template"
+    When I follow:
+      | Theme | Add a template |
     And I fill in "Name" with "Home"
     And I press "Save this template"
     Then I should see "Houston, we have some problems."
@@ -74,7 +74,23 @@ Feature: Creating Templates
 
 ##################################################
 
-  # Scenario: Removing
-  #   Given I have a template
-  #
-  #   When I press ""
+  Scenario: Removing
+    Given I have a "Home" template
+
+    # basic removal
+    When I remove that template
+    Then I should see "Template was removed"
+
+    When I press "Undo"
+    Then I should see "Template was added back."
+    And I should see "Home" within the templates
+
+    # ensuring fields are restored
+    When I add a "body" field for that template
+    And I add a "footer" field for that template
+    And I remove that template
+    And I press "Undo"
+    And I visit the fields page for that template
+    Then I should see "body" within the fields
+    And I should see "footer" within the fields
+
