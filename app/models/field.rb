@@ -10,7 +10,7 @@ class Field < ActiveRecord::Base
   ### associations ###
   belongs_to :template
   has_many :pages, :through => :template
-  has_many :contents, :dependent => :destroy
+  has_many :contents
 
   ### normalizations ###
   normalize_attributes :name
@@ -24,7 +24,11 @@ class Field < ActiveRecord::Base
 
   ### callbacks ###
   after_create do
-    pages.each { |p| contents.create!(:page => p) }
+    pages.each do |p|
+      unless contents.find_by_page_id(p.id)
+        contents.create!(:page => p)
+      end
+    end
   end
 
   def human_field_type

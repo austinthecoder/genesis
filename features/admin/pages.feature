@@ -43,30 +43,39 @@ Feature: Pages
     When I follow "Pages"
     Then I should see "About" within the page with the title "Home"
 
+##################################################
 
+  Scenario: Editing page fields
+    # field exists before
+    Given I have a "Home" template
+    And I have a "body" field for that template
 
-  Scenario: Creating a page with a template/editing
-    Given a template with the name "Home" for that user
+    When I add a "Home" page for that template
+    Then I should see the "Body" field
 
-    When I follow "Pages"
-    And I follow "Add the Home page"
-    And I fill in "Title" with "Homepage"
-    And I select "Home" from "Template"
+    # adding a field
+    When I add a "footer" field for that template
+    And I visit the page for that page
+    Then I should see the "Footer" field
+
+    # saving field content
+    When I fill in the following:
+      | Body   | some body content   |
+      | Footer | footer content here |
     And I press "Save"
-    Then I should see "Page was saved"
-    Then I should not see the "Template" field
+    Then I should see "Page was saved."
+    And the "Body" field should contain "some body content"
+    And the "Footer" field should contain "footer content here"
 
-    When fields are added to that template with the attributes:
-      | Name   | Type       |
-      | Body   | long text  |
-      | Footer | short text |
-    And I follow "Pages"
-    And I follow "Homepage"
-    And I fill in "Body" with "this is the body"
-    And I fill in "Footer" with "this is the footer"
-    And I press "Save"
-    Then I should see "Page was saved"
-
-    When I remove the "Body" field for the "Home" template
-    And I follow "Pages" then "Homepage"
+    # removing fields
+    When I remove the "body" field for that template
+    And I visit the page for that page
     Then I should not see the "Body" field
+    And the "Footer" field should contain "footer content here"
+
+    When I remove the "footer" field for that template
+    And I press "Undo"
+    And I visit the page for that page
+    Then the "Footer" field should contain "footer content here"
+
+##################################################

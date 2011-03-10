@@ -1,3 +1,18 @@
+Given /^I have a "([^"]*)" field for that template$/ do |field_name|
+  When %{I add a "#{field_name}" field for that template}
+end
+
+##################################################
+
+When /^the following fields are added to that template:$/ do |table|
+  When "I visit the fields page for that template"
+  table.hashes.each do |attrs|
+    And %{I fill in the name field with "#{attrs["Name"]}"}
+    And %{I select "#{attrs["Type"]}" from the type field} if attrs["Type"]
+    And %{I press "Add"}
+  end
+end
+
 When /^I fill in the name field with "([^"]*)"$/ do |value|
   fill_in('field_name', :with => value)
 end
@@ -6,22 +21,18 @@ When /^I select "([^"]*)" from the type field$/ do |value|
   select(value, :from => 'field_field_type')
 end
 
-When /^fields are added to (that template) with the attributes:$/ do |tpl, table|
-  table.map_headers!('Type' => 'field_type') do |h|
-    h.downcase.gsub(/\s/, '_')
-  end
-  table.map_column!('field_type') { |ft| ft.gsub(' ', '_') }
-  table.hashes.each do |attrs|
-    Factory(:field, attrs.merge(:template => tpl))
-  end
+When /^I remove the "([^"]*)" field for that template$/ do |field_name|
+  steps %{
+    When I visit the fields page for that template
+    And I press "remove" within the row for the field with the name "#{field_name}"
+  }
 end
 
-When /^I remove the "([^"]*)" field for the "([^"]*)" template$/ do |field_name, template_name|
+When /^I add a "([^"]*)" field for that template$/ do |field_name|
   steps %{
-    When I follow "Theme"
-    And I follow "#{template_name}"
-    And I follow "template data"
-    And I press "remove" within the row for the field with the name "#{field_name}"
+    When I visit the fields page for that template
+    And I fill in the name field with "#{field_name}"
+    And I press "Add"
   }
 end
 

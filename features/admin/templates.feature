@@ -74,69 +74,7 @@ Feature: Creating Templates
 
 ##################################################
 
-  Scenario: Users should only see templates belonging to them
-    Given a user with the email "john@example.com"
-    And templates for that user with the attributes:
-      | Name |
-      | Tpl1 |
-      | Tpl2 |
-    And a user
-    And templates for that user with the attributes:
-      | Name |
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-    When I sign out
-    And I sign in as the user with the email "john@example.com"
-    And I follow "Theme"
-    Then I should see each of the following within the templates:
-      | Tpl1 |
-      | Tpl2 |
-    And I should not see each of the following within the templates:
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-    When I follow "Theme"
-    And I follow "Add a template"
-    Then I should see each of the following within the templates within the sidebar:
-      | Tpl1 |
-      | Tpl2 |
-    And I should not see each of the following within the templates within the sidebar:
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-    When I press "Save this template"
-    Then I should see each of the following within the templates within the sidebar:
-      | Tpl1 |
-      | Tpl2 |
-    And I should not see each of the following within the templates within the sidebar:
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-    When I follow "Theme"
-    And I follow "Tpl1"
-    Then I should see each of the following within the templates within the sidebar:
-      | Tpl1 |
-      | Tpl2 |
-    And I should not see each of the following within the templates within the sidebar:
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-    When I fill in "Name" with ""
-    And I press "Save this template"
-    Then I should see each of the following within the templates within the sidebar:
-      | Tpl1 |
-      | Tpl2 |
-    And I should not see each of the following within the templates within the sidebar:
-      | Tpl3 |
-      | Tpl4 |
-      | Tpl5 |
-
-##################################################
-
-  Scenario: Removing
+  # Scenario: Removing
+  #   Given I have a template
+  #
+  #   When I press ""

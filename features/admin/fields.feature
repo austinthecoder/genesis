@@ -2,8 +2,8 @@ Feature: Template Fields
 
   Background:
     Given a user
-    And a template with the name "Home" for that user
     And I am signed in as that user
+    And I have a "Home" template
 
 ##################################################
 

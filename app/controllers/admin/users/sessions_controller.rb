@@ -1,6 +1,6 @@
 class Admin::Users::SessionsController < Devise::SessionsController
 
-  layout 'admin'
+  layout 'admin_login'
 
   def after_sign_in_path_for(resource)
     admin_root_url

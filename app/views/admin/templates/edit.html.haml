@@ -1,8 +1,9 @@
 .section
   %h2
     = link_to "Theme", admin_theme_path
-    > Templates >
-    = @tpl.name
+    >
+    = @tpl.name_was
+    Template
 
   %p= link_to "template data", admin_template_fields_path(@tpl)
 

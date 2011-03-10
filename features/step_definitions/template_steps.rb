@@ -1,12 +1,10 @@
-Given /^templates for (that user) with the attributes:$/ do |user, table|
-  table.map_headers! { |h| h.downcase.gsub(/\s/, '_').to_sym }
-  table.hashes.each do |attrs|
-    Factory(:template, attrs.merge(:user => user))
-  end
-end
-
-Given /^a template with the name "([^"]*)" for (that user)$/ do |name, user|
-  @template = Factory(:template, :name => name, :user => user)
+Given /^I have a "([^"]*)" template$/ do |template_name|
+  steps %{
+    When I follow:
+      | Theme | Add a template |
+    And I fill in "Name" with "#{template_name}"
+    And I press "Save this template"
+  }
 end
 
 ##################################################

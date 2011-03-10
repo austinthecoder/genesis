@@ -6,10 +6,14 @@ Transform /(other user)/ do |step|
   User.last
 end
 
-Transform /(the user with the email "([^"]*)")/ do |step, email|
-  User.find_by_email(email)
-end
+##################################################
 
 Transform /(that template)/ do |step|
-  @template || Template.last
+  Template.last
+end
+
+##################################################
+
+Transform /(that page)/ do |step|
+  Page.last
 end

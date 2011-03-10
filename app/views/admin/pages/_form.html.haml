@@ -1,17 +1,17 @@
 = simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
   = f.input :title, :wrapper_html => {:class => 'title'}
 
-  - if f.object.slug_editable?
+  - if @page.slug_editable?
     = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
   - else
     = f.label :permalink
     %p
       = "/"
 
-  - if f.object.new_record?
+  - if @page.new_record?
     = f.association :template
   - else
-    = f.simple_fields_for :contents do |cf|
+    = f.simple_fields_for :contents, @page.contents.joins(:field).includes(:field) do |cf|
       - field = cf.object.field
       = cf.input :body,
         :label => field.name.titleize,

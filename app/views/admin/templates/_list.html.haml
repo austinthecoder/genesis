@@ -1,5 +1,6 @@
 .templates
   %h3 Templates
+  %p= link_to "Add a template", new_admin_template_path
   %ul
     - @tpls.each do |t|
       %li= link_to t.name, edit_admin_template_path(t)

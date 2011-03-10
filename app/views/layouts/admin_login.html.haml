@@ -6,14 +6,6 @@
     = stylesheet_link_tag 'admin'
     = javascript_include_tag 'admin'
   %body
-    #menu
-      %ul
-        %li= link_to "Pages", admin_pages_path
-        %li= link_to "Theme", admin_theme_path
-        %li= link_to 'Sign out', destroy_user_session_path
-        -# main_menu.each do |title, path|
-          %li=# link_to title, path
-      .clear
     #content
       #main
         #main_inner
@@ -23,13 +15,9 @@
                 .notice= raw(flash.notice)
               - if flash.alert
                 .alert= raw(flash.alert)
-          = yield
+          .section
+            = yield
       #sidebar
-        #sidebar_inner
-          = yield :sidebar
-          %ul
-            -# sub_menu.each do |title, path|
-              %li=# link_to title, path
       .clear
     #footer
       [footer]
