@@ -12,10 +12,17 @@ When /^I follow:$/ do |table|
   end
 end
 
-When /^I visit the fields page for (that template)$/ do |template|
+When /^I visit the page for (that template)$/ do |tpl|
   steps %{
     When I follow:
-      | Theme | #{template.name} | template data |
+      | Theme | #{tpl.name} |
+  }
+end
+
+When /^I visit the fields page for that template$/ do
+  steps %{
+    When I visit the page for that template
+    And I follow "template data"
   }
 end
 

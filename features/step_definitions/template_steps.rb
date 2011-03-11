@@ -1,5 +1,14 @@
-Given /^I have a "([^"]*)" template$/ do |template_name|
-  When %{I add a "#{template_name}" template}
+Given /^I have a "([^"]*)" template$/ do |tpl_name|
+  When %{I add a "#{tpl_name}" template}
+end
+
+Given /^I have a "([^"]*)" template:$/ do |tpl_name, tpl_content|
+  steps %{
+    When I add a "#{tpl_name}" template:
+      """
+      #{tpl_content}
+      """
+  }
 end
 
 ##################################################
@@ -15,11 +24,21 @@ When /^I remove that template$/ do
   }
 end
 
-When /^I add a "([^"]*)" template$/ do |template_name|
+When /^I add a "([^"]*)" template$/ do |tpl_name|
   steps %{
     When I follow:
       | Theme | Add a template |
-    And I fill in "Name" with "#{template_name}"
+    And I fill in "Name" with "#{tpl_name}"
+    And I press "Save this template"
+  }
+end
+
+Given /^I add a "([^"]*)" template:$/ do |tpl_name, tpl_content|
+  steps %{
+    When I follow:
+      | Theme | Add a template |
+    And I fill in "Name" with "#{tpl_name}"
+    And I fill in the template's content with "#{tpl_content}"
     And I press "Save this template"
   }
 end
