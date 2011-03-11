@@ -160,5 +160,15 @@ Feature: Creating/Editing Pages
 
 ##################################################
 
-  @wip
   Scenario: Changing templates
+    Given I have a "Home" template
+    And I have a "body" field for that template
+    And I have a "Blog" template
+    And I have a "foot" field for that template
+    And I have a "Home" page for that template
+
+    When I follow "change" within the template section
+    And I select "Home" from "Template"
+    And I press "Save"
+    Then I should see the "Body" field
+    Then I should not see the "Foot" field

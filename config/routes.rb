@@ -10,6 +10,9 @@ Genesis::Application.routes.draw do
     end
 
     resources :pages, :only => %w(index new create show edit update) do
+      member do
+        get :edit_template
+      end
       resources :pages, :only => %w(new create)
     end
 

@@ -27,9 +27,10 @@ class Page < ActiveRecord::Base
   validates :title, :presence => true
 
   ### callbacks ###
-  after_create do
-    fields.each do |f|
-      contents.create!(:field => f)
+  after_save do
+    if template_id_changed?
+      contents.each(&:destroy)
+      fields.each { |f| contents.create!(:field => f) }
     end
   end
 

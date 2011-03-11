@@ -34,6 +34,8 @@ module ScopeHelpers
       end
       "tr#field_#{field.id}"
 
+    when "the template section" then '.template'
+
     else
       raise <<-EOS
 Can't find mapping from "#{scope_str}" to a scope.

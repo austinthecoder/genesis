@@ -211,7 +211,8 @@ describe Admin::PagesController do
 
     {
       :get => :edit,
-      :put => :update
+      :put => :update,
+      :get => :edit_template
     }.each do |http_method, action|
       describe "#{http_method.upcase} #{action}" do
         it "assigns the templates for the current user (newest first)" do
@@ -267,6 +268,12 @@ describe Admin::PagesController do
         it { response.should render_template(:edit) }
       end
     end
+
+    # describe "GET edit_template" do
+    #   before { get :edit_template, @params }
+    #
+    #   it { response.should render_template(:edit) }
+    # end
   end
 
 end

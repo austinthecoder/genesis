@@ -4,18 +4,20 @@
   - if @page.slug_editable?
     = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
   - else
-    = f.label :permalink
-    %p= "/"
+    %p
+      = f.label :permalink
+      = "/"
 
-  - if @tpls.present?
-    - if @page.new_record?
-      = f.association :template
-    - else
-      - if @page.template
-        = f.label :template
-        %p= @page.template.name
-      - else
+  .template
+    - if @tpls.present?
+      - if @page.new_record? || !@page.template
         = f.association :template
+      - else
+        - if @page.template
+          %p
+            = f.label :template
+            = @page.template.name
+            = link_to "change", edit_template_admin_page_path(p)
 
   = f.simple_fields_for :contents, @page.contents.active.includes(:field) do |cf|
     - field = cf.object.field
