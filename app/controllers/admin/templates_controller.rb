@@ -1,8 +1,8 @@
 class Admin::TemplatesController < AdminController
 
-  before_filter :find_template, :only => %w(edit update destroy)
-  before_filter :assign_templates, :only => %w(new create edit update)
   before_filter :build_template, :only => %w(new create)
+  before_filter :find_template, :only => %w(edit update destroy)
+  before_filter :assign_templates, :only => %w(new create edit update destroy)
 
   def new
   end
@@ -20,15 +20,13 @@ class Admin::TemplatesController < AdminController
 
   def update
     @tpl.update_attributes!(params[:template])
-    # TODO: set a notice
-    redirect_to edit_admin_template_url(@tpl)
+    redirect_to edit_admin_template_url(@tpl), :notice => "Template was saved."
   rescue ActiveRecord::RecordInvalid
     flash.alert = "Houston, we have some problems."
     render :edit
   end
 
   def destroy
-    @tpl = templates_scope.find(params[:id])
     @tpl.destroy
     undo_link = view_context.button_to("Undo", revert_admin_version_path(@tpl.versions.scoped.last))
     redirect_to admin_theme_url, :notice => "Template was removed. #{undo_link}"
@@ -37,7 +35,7 @@ class Admin::TemplatesController < AdminController
   private
 
   def find_template
-    @tpl = Template.find(params[:id])
+    @tpl = templates_scope.find(params[:id])
   end
 
   def build_template

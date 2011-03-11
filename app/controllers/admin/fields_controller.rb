@@ -1,11 +1,9 @@
 class Admin::FieldsController < AdminController
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
-
   with_options :only => %w(index create) do |c|
     c.before_filter :find_template
-    c.before_filter :assign_fields
     c.before_filter :build_field
+    c.before_filter :assign_fields
   end
 
   ##################################################
@@ -37,7 +35,7 @@ class Admin::FieldsController < AdminController
   end
 
   def assign_fields
-    @fields = fields_scope.order("created_at ASC").all
+    @fields = fields_scope.order("created_at ASC")
   end
 
   def build_field

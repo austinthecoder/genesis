@@ -15,6 +15,7 @@ class Admin::PagesController < AdminController
     @page.save!
     redirect_to edit_admin_page_url(@page), :notice => "Page was saved."
   rescue ActiveRecord::RecordInvalid
+    flash.alert = "Houston, we have some problems."
     render :new
   end
 
@@ -25,6 +26,7 @@ class Admin::PagesController < AdminController
     @page.update_attributes!(params[:page])
     redirect_to edit_admin_page_url(@page), :notice => "Page was saved."
   rescue ActiveRecord::RecordInvalid
+    flash.alert = "Houston, we have some problems."
     render :edit
   end
 
