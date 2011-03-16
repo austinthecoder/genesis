@@ -20,6 +20,12 @@ module ScopeHelpers
     when /the page with the title "([^"]*)"/
       page = Page.find_by_title($1)
       "#page_#{page.id}"
+    when /the row for (the "([^"]*)" page)/
+      page = Transform($1)
+      "#page_#{page.id}"
+    when /the row for (that page)/ then
+      page = Transform($1)
+      "#page_#{page.id}"
 
     when "the fields" then ".fields"
     when /the row for the field with the name "([^"]*)"/

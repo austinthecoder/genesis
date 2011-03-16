@@ -26,20 +26,41 @@ end
 
 When /^I add a "([^"]*)" template$/ do |tpl_name|
   steps %{
-    When I follow:
-      | Theme | Add a template |
+    When I visit the new template page
     And I fill in "Name" with "#{tpl_name}"
     And I press "Save this template"
   }
 end
 
-Given /^I add a "([^"]*)" template:$/ do |tpl_name, tpl_content|
+When /^I add a "([^"]*)" template:$/ do |tpl_name, tpl_content|
   steps %{
-    When I follow:
-      | Theme | Add a template |
+    When I visit the new template page
     And I fill in "Name" with "#{tpl_name}"
     And I fill in the template's content with "#{tpl_content}"
     And I press "Save this template"
+  }
+end
+
+### navigation ###
+
+When /^I visit the new template page$/ do
+  steps %{
+    When I follow:
+      | Theme | Add a template |
+  }
+end
+
+When /^I visit the page for (that template)$/ do |tpl|
+  steps %{
+    When I follow:
+      | Theme | #{tpl.name} |
+  }
+end
+
+When /^I visit the fields page for that template$/ do
+  steps %{
+    When I visit the page for that template
+    And I follow "template data"
   }
 end
 
@@ -49,4 +70,10 @@ Then /^the template's content field should contain "([^"]*)"$/ do |value|
   field = find_field('template_content')
   field_value = (field.tag_name == 'textarea') ? field.text : field.value
   field_value.should =~ /#{value}/
+end
+
+Then /^the template's content field should be blank$/ do
+  field = find_field('template_content')
+  field_value = (field.tag_name == 'textarea') ? field.text : field.value
+  field_value.should be_blank
 end

@@ -1,6 +1,6 @@
 Feature: Admin Sign-in
 
-  Scenario: Failed sign-in
+  Scenario: Validations
     When I go to the admin sign-in page
     And I fill in the following:
       | Email    | john@example.com |
@@ -8,9 +8,26 @@ Feature: Admin Sign-in
     And I press "Sign in"
     Then I should see "Invalid email or password"
 
+##################################################
 
-  Scenario: Successful sign-in
-    Given a user with the attributes:
+  Scenario: Can't sign in to another site
+    Given a site
+    And a user with the attributes:
+      | Email    | john@example.com |
+      | Password | secret           |
+
+    When I go to the admin sign-in page
+    And I fill in the following:
+      | Email    | john@example.com |
+      | Password | secret           |
+    And I press "Sign in"
+    Then I should see "Invalid email or password"
+
+##################################################
+
+  Scenario: Can sign in to my own site
+    Given a site
+    And a user for that site with the attributes:
       | Email                 | steve@example.com |
       | Password              | secret            |
       | Password Confirmation | secret            |
@@ -21,11 +38,3 @@ Feature: Admin Sign-in
       | Password | secret           |
     And I press "Sign in"
     Then I should see "Signed in successfully"
-
-
-  Scenario: Sign out
-    Given a user
-    And I am signed in as that user
-
-    When I follow "Sign out"
-    Then I should see "Signed out successfully."

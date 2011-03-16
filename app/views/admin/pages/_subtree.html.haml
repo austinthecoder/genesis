@@ -1,8 +1,10 @@
 - unless arranged_pages.empty?
   %ul
-    - arranged_pages.each do |page, arranged_pages|
-      %li{:id => "page_#{page.id}"}
-        = link_to page.title, edit_admin_page_path(page)
+    - arranged_pages.each do |p, arranged_pages|
+      %li{:id => "page_#{p.id}"}
+        = link_to p.title, edit_admin_page_path(p)
         %span.actions
-          = link_to "add subpage", new_admin_page_page_path(page)
+          = link_to "add subpage", new_admin_page_page_path(p)
+          |
+          = button_to "remove", admin_page_path(p), :method => 'delete'
         = render "subtree", :arranged_pages => arranged_pages

@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable, :rememberable, :trackable
+  devise :database_authenticatable, :registerable, :rememberable, :trackable, :authentication_keys => [:email, :site_id]
 
   ### associations ###
+  belongs_to :site
   has_many :templates
   has_many :fields, :through => :templates
   has_many :pages
@@ -16,6 +17,13 @@ class User < ActiveRecord::Base
     :presence => {:on => :create},
     :confirmation => {:if => :password_required?},
     :length => {:within => 6..20, :if => :password_required?}
+
+  class << self
+    def find_for_authentication(conditions)
+      conditions[:sites] = {:id => conditions.delete(:site_id)}
+      includes(:site).where(conditions).first
+    end
+  end
 
   private
 

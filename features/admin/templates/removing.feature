@@ -1,7 +1,8 @@
 Feature: Removing Templates
 
   Background:
-    Given a user
+    Given a site
+    And a user for that site
     And I am signed in as that user
     And I have a "Home" template:
       """

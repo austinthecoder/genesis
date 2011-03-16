@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309214227) do
+ActiveRecord::Schema.define(:version => 20110316041221) do
 
   create_table "contents", :force => true do |t|
     t.integer  "page_id"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(:version => 20110309214227) do
   add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
   add_index "pages", ["template_id"], :name => "index_pages_on_template_id"
 
+  create_table "sites", :force => true do |t|
+    t.string   "domain"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "templates", :force => true do |t|
     t.string   "name"
     t.text     "content"
@@ -71,9 +77,11 @@ ActiveRecord::Schema.define(:version => 20110309214227) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "site_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["site_id"], :name => "index_users_on_site_id"
 
   create_table "versions", :force => true do |t|
     t.string   "item_type",  :null => false

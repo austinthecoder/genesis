@@ -12,54 +12,19 @@ When /^I follow:$/ do |table|
   end
 end
 
-When /^I visit the page for (that template)$/ do |tpl|
-  steps %{
-    When I follow:
-      | Theme | #{tpl.name} |
-  }
-end
-
-When /^I visit the fields page for that template$/ do
-  steps %{
-    When I visit the page for that template
-    And I follow "template data"
-  }
-end
-
-When /^I visit the page for (that page)$/ do |page|
-  steps %{
-    When I follow:
-      | Pages | #{page.title} |
-  }
-end
-
-When /^I visit the new page page$/ do
-  steps %{
-    When I follow:
-      | Pages | Add the Home page |
-  }
-end
-
-When /^I visit the new subpage page for (that page)$/ do |page|
-  steps %{
-    When I follow "Pages"
-    And I follow "add subpage" within the page with the title "#{page.title}"
-  }
-end
-
 ##################################################
 
-# Then /^I should see each of the following:$/ do |table|
-#   table.raw.flatten.each do |text|
-#     page.should have_content(text)
-#   end
-# end
+Then /^I should see each of the following:$/ do |table|
+  table.raw.flatten.each do |text|
+    page.should have_content(text)
+  end
+end
 
-# Then /^I should not see each of the following:$/ do |table|
-#   table.raw.flatten.each do |text|
-#     page.should have_no_content(text)
-#   end
-# end
+Then /^I should not see each of the following:$/ do |table|
+  table.raw.flatten.each do |text|
+    page.should have_no_content(text)
+  end
+end
 
 Then /^I should not see the "([^"]*)" field$/ do |field|
   lambda { find_field(field) }.should raise_error(Capybara::ElementNotFound)
@@ -79,4 +44,10 @@ Then /^I should see the fields:$/ do |table|
   table.raw.flatten.each do |field|
     Then %{I should see the "#{field}" field}
   end
+end
+
+Then /^the "([^"]*)" field should be blank$/ do |field|
+  field = find_field(field)
+  field_value = (field.tag_name == 'textarea') ? field.text : field.value
+  field_value.should be_blank
 end

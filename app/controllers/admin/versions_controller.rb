@@ -16,6 +16,12 @@ class Admin::VersionsController < AdminController
         flash.notice = "Template was added back."
         redirect_to admin_theme_url
       end
+    when 'Page'
+      if page = version.reify
+        page.save!
+        flash.notice = "Page was added back."
+        redirect_to admin_pages_url
+      end
     end
   end
 

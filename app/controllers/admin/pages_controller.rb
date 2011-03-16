@@ -1,8 +1,8 @@
 class Admin::PagesController < AdminController
 
   before_filter :build_page, :only => %w(new create)
-  before_filter :find_page, :only => %w(edit update edit_template)
-  before_filter :assign_templates, :only => %w(new create edit update edit_template)
+  before_filter :find_page, :only => %w(edit update edit_template destroy)
+  before_filter :assign_templates, :only => %w(new create edit update edit_template destroy)
 
   def index
     @arranged_pages = pages_scope.arrange
@@ -28,6 +28,12 @@ class Admin::PagesController < AdminController
   rescue ActiveRecord::RecordInvalid
     flash.alert = "Houston, we have some problems."
     render :edit
+  end
+
+  def destroy
+    @page.destroy
+    undo_link = view_context.button_to("Undo", revert_admin_version_path(@page.versions.scoped.last))
+    redirect_to admin_pages_url, :notice => "Page was removed. #{undo_link}"
   end
 
   private

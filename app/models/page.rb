@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
 
-  has_ancestry
+  has_ancestry :orphan_strategy => :rootify
+  has_paper_trail
 
   ### associations ###
   belongs_to :user

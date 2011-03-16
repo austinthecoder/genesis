@@ -8,6 +8,16 @@ Given /^a user with the attributes:$/ do |table|
   create_user(table.transpose.rows_hash)
 end
 
+Given /^a user for (that site)$/ do |site|
+  create_user(:site => site)
+end
+
+Given /^a user for (that site) with the attributes:$/ do |site, table|
+  table = table.transpose
+  table.map_headers! { |h| h.downcase.gsub(/\s/, '_').to_sym }
+  create_user(table.transpose.rows_hash.merge(:site => site))
+end
+
 Given /^a template for the (other user) named "([^"]*)"$/ do |user, template_name|
   Factory(:template, :name => template_name, :user => user)
 end

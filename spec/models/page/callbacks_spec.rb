@@ -44,26 +44,47 @@ describe Page, 'callbacks' do
     end
   end
 
+##################################################
+
   describe "after destroying" do
     subject { Factory(:page) }
 
-    before do
-      @non_page_contents = (1..2).map { Factory(:content) }
-      @page_contents = (1..2).map { Factory(:content, :page => subject) }
-    end
+    context "with contents" do
+      before do
+        @non_page_contents = (1..2).map { Factory(:content) }
+        @page_contents = (1..2).map { Factory(:content, :page => subject) }
+      end
 
-    it "destroys it's contents" do
-      subject.destroy
-      @page_contents.each do |c|
-        lambda { c.reload }.should raise_error(ActiveRecord::RecordNotFound)
+      it "destroys it's contents" do
+        subject.destroy
+        @page_contents.each do |c|
+          lambda { c.reload }.should raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      it "does not destroy any other contents" do
+        subject.destroy
+        @non_page_contents.each do |c|
+          lambda { c.reload }.should_not raise_error
+        end
       end
     end
 
-    it "does not destroy any other contents" do
+    it "rootifies it's children" do
+      children = (1..2).map { Factory(:sub_page, :parent => subject) }
+      Page.count.should eq(3)
       subject.destroy
-      @non_page_contents.each do |c|
-        lambda { c.reload }.should_not raise_error
-      end
+      Page.count.should eq(2)
+      children.each { |p| p.reload.should be_is_root }
+    end
+
+    it "does not rootify descendants beyond it's children" do
+      child = Factory(:sub_page, :parent => subject)
+      grandchildren = (1..2).map { Factory(:sub_page, :parent => child) }
+      Page.count.should eq(4)
+      subject.destroy
+      Page.count.should eq(3)
+      grandchildren.each { |p| p.reload.parent.should eq(child) }
     end
   end
 

@@ -13,7 +13,8 @@ describe Admin::PagesController, "member actions" do
   {
     :get => :edit,
     :put => :update,
-    :get => :edit_template
+    :get => :edit_template,
+    :delete => :destroy
   }.each do |http_method, action|
     describe "#{http_method.upcase} #{action}" do
       context "when the id matches a page belonging to the user" do
@@ -95,6 +96,24 @@ describe Admin::PagesController, "member actions" do
       before { get :edit_template, @params }
 
       it { response.should render_template(:edit_template) }
+    end
+  end
+
+##################################################
+
+  describe "DELETE destroy" do
+    context "when the id matches a page belonging to the user" do
+      before { delete :destroy, @params }
+
+      it { lambda { @page.reload }.should raise_error(ActiveRecord::RecordNotFound) }
+
+      it "sets a notice with an undo link" do
+        path = revert_admin_version_path(@page.versions.scoped.last)
+        undo_button = controller.view_context.button_to("Undo", path)
+        flash.notice.should eq("Page was removed. #{undo_button}")
+      end
+
+      it { response.should redirect_to(admin_pages_url) }
     end
   end
 

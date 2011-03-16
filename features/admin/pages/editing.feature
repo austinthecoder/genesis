@@ -1,7 +1,8 @@
 Feature: Creating/Editing Pages
 
   Background:
-    Given a user
+    Given a site
+    And a user for that site
     And I am signed in as that user
 
   Scenario: Validations

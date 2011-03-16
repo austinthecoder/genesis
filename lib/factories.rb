@@ -24,8 +24,17 @@ FactoryGirl.define do
     title 'My Page'
   end
 
+  factory :sub_page, :parent => :page do
+    parent { Factory(:page) }
+    slug "my-page"
+  end
+
   factory :content do
     page
     field
+  end
+
+  factory :site do
+
   end
 end
