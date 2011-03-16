@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-  has_ancestry :orphan_strategy => :rootify
+  has_ancestry :orphan_strategy => :restrict
   has_paper_trail
 
   ### associations ###
@@ -37,6 +37,10 @@ class Page < ActiveRecord::Base
 
   def slug_editable?
     !is_root?
+  end
+
+  def can_destroy?
+    new_record? || is_childless?
   end
 
 end

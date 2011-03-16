@@ -51,3 +51,11 @@ Then /^the "([^"]*)" field should be blank$/ do |field|
   field_value = (field.tag_name == 'textarea') ? field.text : field.value
   field_value.should be_blank
 end
+
+Then /^I should see the "([^"]*)" button$/ do |locator|
+  page.should have_button(locator)
+end
+
+Then /^I should not see the "([^"]*)" button$/ do |locator|
+  page.should have_no_button(locator)
+end
