@@ -10,13 +10,12 @@ Genesis::Application.routes.draw do
     end
 
     resources :pages, :only => %w(index new create show edit update destroy) do
-      member do
-        get :edit_template
-      end
+      member { get :edit_template }
+
       resources :pages, :only => %w(new create)
     end
 
-    resources :templates, :only => %w(show new create edit update destroy) do
+    resources :templates, :only => %w(new create edit update destroy) do
       resources :fields, :only => %w(index create)
     end
 
