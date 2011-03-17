@@ -1,0 +1,10 @@
+.section
+  %h2
+    = link_to "Theme", admin_theme_path
+    >
+    = link_to "#{@tpl.name} Template", admin_template_path(@tpl)
+    >
+    = @field.name_was
+    Field
+
+  = render 'form'

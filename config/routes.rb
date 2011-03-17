@@ -20,7 +20,7 @@ Genesis::Application.routes.draw do
       resources :fields, :only => %w(index create)
     end
 
-    resources :fields, :only => %w(destroy)
+    resources :fields, :only => %w(destroy edit update)
 
     resource :theme, :only => %w(show)
 
