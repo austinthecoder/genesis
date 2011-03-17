@@ -22,4 +22,13 @@ describe Field, 'validations' do
     end
   end
 
+  context "with an existing record" do
+    subject { Factory(:field, :field_type => 'short_text') }
+
+    it { should accept_values_for(:field_type, subject.field_type) }
+    it "can't change the field type" do
+      should_not accept_values_for(:field_type, 'long_text')
+    end
+  end
+
 end

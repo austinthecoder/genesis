@@ -17,10 +17,17 @@ class Field < ActiveRecord::Base
 
   ### validations ###
   validates :template_id, :presence => true
-  validates :field_type, :inclusion => {:in => TYPE_OPTIONS.keys}
   validates :name,
     :presence => true,
     :uniqueness => {:scope => :template_id}
+  validate :on => :create do
+    if TYPE_OPTIONS.keys.exclude?(field_type)
+      errors.add(:field_type, "must be one of #{TYPE_OPTIONS.keys.inspect}")
+    end
+  end
+  validate :on => :update do
+    errors.add(:field_type, "cannot be changed") if field_type_changed?
+  end
 
   ### callbacks ###
   after_create do
