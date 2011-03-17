@@ -17,6 +17,10 @@ When /^I fill in the name field with "([^"]*)"$/ do |value|
   fill_in('field_name', :with => value)
 end
 
+Then /^the name field should be blank$/ do
+  find_field('field_name').value.should be_blank
+end
+
 When /^I select "([^"]*)" from the type field$/ do |value|
   select(value, :from => 'field_field_type')
 end
@@ -24,16 +28,43 @@ end
 When /^I remove the "([^"]*)" field for that template$/ do |field_name|
   steps %{
     When I visit the fields page for that template
-    And I press "remove" within the row for the field with the name "#{field_name}"
+    And I press "remove" within the row for the "#{field_name}" field
+  }
+end
+
+When /^I remove (that field)$/ do |field|
+  tpl = field.template
+  steps %{
+    When I visit the fields page for the "#{tpl.name}" template
+    And I press "remove" within the row for the "#{field.name}" field
+  }
+end
+
+When /^I add a "([^"]*)" field$/ do |field_name|
+  steps %{
+    When I fill in the name field with "#{field_name}"
+    And I press "Add"
   }
 end
 
 When /^I add a "([^"]*)" field for that template$/ do |field_name|
   steps %{
     When I visit the fields page for that template
-    And I fill in the name field with "#{field_name}"
-    And I press "Add"
+    And I add a "#{field_name}" field
   }
+end
+
+### navigation ###
+
+When /^I visit the fields page for the "([^"]*)" template$/ do |tpl_name|
+  steps %{
+    When I visit the page for the "#{tpl_name}" template
+    And I follow "template data"
+  }
+end
+
+When /^I visit the fields page for (that template)$/ do |tpl|
+  When %{I visit the fields page for the "#{tpl.name}" template}
 end
 
 ##################################################

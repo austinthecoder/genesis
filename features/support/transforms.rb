@@ -20,6 +20,12 @@ end
 
 ##################################################
 
+Transform /^(that field)$/ do |step|
+  Field.last
+end
+
+##################################################
+
 Transform /^(that page)$/ do |step|
   Page.last
 end

@@ -28,7 +28,8 @@ module ScopeHelpers
       "#page_#{page.id}"
 
     when "the fields" then ".fields"
-    when /the row for the field with the name "([^"]*)"/
+    when /the row for (that field)/ then "#field_#{Transform($1).id}"
+    when /the row for the "([^"]*)" field/
       fields = Field.where(:name => $1)
       field = case fields.size
         when 0

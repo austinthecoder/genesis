@@ -63,7 +63,7 @@ Feature: Creating/Editing Pages
 
 ##################################################
 
-  Scenario: Viewing the template field - with no templates
+  Scenario: Viewing the template field when there are no templates
     When I visit the new page page
     Then I should not see the "Template" field
 
@@ -72,7 +72,7 @@ Feature: Creating/Editing Pages
 
 ##################################################
 
-  Scenario: Viewing the template field - with templates
+  Scenario: Viewing the template field when there are templates
     Given I have a "Home" template
 
     When I visit the new page page
@@ -139,25 +139,6 @@ Feature: Creating/Editing Pages
     And I press "Save"
     Then I should see "Page was saved."
     And the "Body" field should contain "some content"
-
-##################################################
-
-  Scenario: Persisting content after restoring a field
-    Given I have a "Home" template
-    And I have a "body" field for that template
-    And I have a "Home" page for that template
-
-    When I fill in "Body" with "some content"
-    And I press "Save"
-    And I remove the "body" field for that template
-    And I press "Undo"
-    And I visit the page for that page
-    Then the "Body" field should contain "some content"
-
-##################################################
-
-  @wip
-  Scenario: Persisting content after restoring a template
 
 ##################################################
 

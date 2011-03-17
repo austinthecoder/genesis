@@ -57,10 +57,10 @@ When /^I visit the page for (that template)$/ do |tpl|
   }
 end
 
-When /^I visit the fields page for that template$/ do
+When /^I visit the page for the "([^"]*)" template$/ do |template_name|
   steps %{
-    When I visit the page for that template
-    And I follow "template data"
+    When I follow:
+      | Theme | #{template_name} |
   }
 end
 
