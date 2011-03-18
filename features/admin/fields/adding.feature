@@ -5,7 +5,7 @@ Feature: Template Fields
     And a user for that site
     And I am signed in as that user
     And I have a "Home" template
-    And I follow "template data"
+    And I follow "Template data"
 
 ##################################################
 

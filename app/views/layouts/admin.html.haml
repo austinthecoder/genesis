@@ -8,11 +8,16 @@
   %body
     #menu
       %ul
-        %li= link_to "Pages", admin_pages_path
-        %li= link_to "Theme", admin_theme_path
-        %li= link_to 'Sign out', destroy_user_session_path
-        -# main_menu.each do |title, path|
-          %li=# link_to title, path
+        - main_menus.each do |menu|
+          %li{:class => ('active' if current_menu.path.include?(menu))}
+            = link_to menu.object.title, menu.object.path
+        %li= link_to "Sign out", destroy_user_session_path
+      .clear
+    #crumbs
+      %ul
+        - crumbs_menu_link.each do |link|
+          %li= link_to link.title, link.path
+        %li.last= current_menu.object.title
       .clear
     #content
       #main
@@ -27,9 +32,10 @@
       #sidebar
         #sidebar_inner
           = yield :sidebar
+          %h3 Menu
           %ul
-            -# sub_menu.each do |title, path|
-              %li=# link_to title, path
+            - current_menu_links.each do |link|
+              %li= link_to link.title, link.path
       .clear
     #footer
       [footer]

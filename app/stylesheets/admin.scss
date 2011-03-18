@@ -1,18 +1,46 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
+@import "compass/css3";
+
 $images_path: '/images';
+$body_bg: #303030;
+$crumbs_bg: lighten($body_bg, 3%);
+$content_bg: $crumbs_bg;
+$footer_bg: $body_bg;
 $error_color: #903030;
 $success_color: #6060ff;
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
+/*@mixin gradient_bg($color, $top: 5, $bottom: $top) {
+  @if $top < 0 and $bottom < 0 {
+    $color1: darken($color, abs($top));
+    $color2: lighten($color, abs($bottom));
+    @include linear-gradient(color-stops($color1, $color2));
+  } @else {
+    $color1: lighten($color, abs($top));
+    $color2: darken($color, abs($bottom));
+    @include linear-gradient(color-stops($color1, $color2));
+  }
+
+  background-color: $color;
+}*/
+
+@mixin inset_top($bg_color) {
+  border-top: 1px solid lighten($bg_color, 6%);
+}
+
+@mixin inset_bottom($bg_color) {
+  border-bottom: 1px solid darken($bg_color, 5%);
+}
+
 @import "reset";
 @import "base";
+@import "layout";
 @import "buttons";
 @import "forms";
-@import "compass/css3";
 
 //////////////////////////////////////////////////
 
 body {
-  background: #303030;
+  background: $body_bg;
   color: #fff;
   font-family: "Droid Sans", Helvetica, sans-serif;
 }
@@ -40,7 +68,8 @@ h1, h2, h3 {
 }
 
 .section {
-  border-bottom: 1px solid #ddd;
+  //background: url($images_path + '/inset-rule.png') repeat-x left bottom;
+  //border-bottom: 1px solid #ddd;
   padding: 20px 30px;
 }
 
@@ -48,51 +77,4 @@ h1, h2, h3 {
   .actions {
     float: right;
   }
-}
-
-//////////////////////////////////////////////////
-
-#menu {
-  background: #202020 url($images_path + '/inset-shadow-bottom.png') repeat-x left bottom;
-
-  a {
-    color: #fff;
-    display: block;
-    font-weight: bold;
-    line-height: 35px;
-    padding: 0 30px;
-  }
-  ul { margin: 0; }
-  li {
-    list-style: none;
-    float: left;
-    text-transform: upcase;
-  }
-  li.active {
-    background: url($images_path + '/inset-shadow-left.png') repeat-y right top;
-    border-left: 1px solid #3a3a3a;
-    padding-right: 4px;
-
-    a { background: #303030; }
-  }
-}
-
-#content {
-  #main {
-    float: left;
-    width: 70%;
-
-    //#main_inner { padding: 20px 30px; }
-  }
-
-  #sidebar {
-    float: right;
-    width: 30%;
-
-    #sidebar_inner { padding: 20px 30px; }
-  }
-}
-
-#footer {
-  padding: 20px 30px;
 }

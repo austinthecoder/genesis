@@ -1,0 +1,77 @@
+#menu {
+  background: url($images_path + '/top-shadow.png') repeat-x left bottom;
+  margin-bottom: -1px;
+
+  a {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    line-height: 35px;
+    padding: 0 30px;
+  }
+  ul { margin: 0; }
+  li {
+    list-style: none;
+    float: left;
+    text-transform: upcase;
+  }
+  li.active {
+    background: url($images_path + '/right-shadow.png') repeat-y right top;
+    border-left: 1px solid lighten($crumbs_bg, 6%);
+    padding-right: 4px;
+
+    a { background: $crumbs_bg; }
+  }
+}
+
+#crumbs {
+  @include inset_top($crumbs_bg);
+  @include inset_bottom($body_bg);
+
+  background: $crumbs_bg;
+  padding: 10px 30px;
+
+  ul {
+    margin: 0;
+
+    li {
+      background: url($images_path + '/crumb_arrow.png') no-repeat right center;
+      display: block;
+      float: left;
+      list-style: none;
+      line-height: 3em;
+      padding-right: 22px;
+      margin-right: 8px;
+    }
+    li.last {
+      background: none;
+      font-size: 2em;
+      line-height: 1.5em;
+      padding: 0;
+    }
+  }
+}
+
+#content {
+  @include inset_top($content_bg);
+
+  background: $content_bg;
+
+  #main {
+    float: left;
+    width: 70%;
+  }
+
+  #sidebar {
+    float: right;
+    width: 30%;
+
+    #sidebar_inner { padding: 20px 30px; }
+  }
+}
+
+#footer {
+  background: url($images_path + '/bot-shadow.png') repeat-x left top;
+
+  padding: 20px 30px;
+}

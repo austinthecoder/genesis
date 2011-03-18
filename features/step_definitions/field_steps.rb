@@ -59,7 +59,7 @@ end
 When /^I visit the fields page for the "([^"]*)" template$/ do |tpl_name|
   steps %{
     When I visit the page for the "#{tpl_name}" template
-    And I follow "template data"
+    And I follow "Template data"
   }
 end
 
