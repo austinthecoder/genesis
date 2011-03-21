@@ -1,26 +1,40 @@
-#menu {
+#header {
+  $height: 35px;
+
   background: url($images_path + '/top-shadow.png') repeat-x left bottom;
   margin-bottom: -1px;
 
-  a {
-    color: #fff;
-    display: block;
-    font-weight: bold;
-    line-height: 35px;
-    padding: 0 30px;
-  }
-  ul { margin: 0; }
-  li {
-    list-style: none;
+  #menu {
     float: left;
-    text-transform: upcase;
-  }
-  li.active {
-    background: url($images_path + '/right-shadow.png') repeat-y right top;
-    border-left: 1px solid lighten($crumbs_bg, 6%);
-    padding-right: 4px;
 
-    a { background: $crumbs_bg; }
+    a {
+      color: #fff;
+      display: block;
+      font-weight: bold;
+      line-height: $height;
+      padding: 0 30px;
+    }
+    ul { margin: 0; }
+    li {
+      list-style: none;
+      float: left;
+      text-transform: upcase;
+    }
+    li.active {
+      background: url($images_path + '/right-shadow.png') repeat-y right top;
+      border-left: 1px solid lighten($crumbs_bg, 6%);
+      padding-right: 4px;
+
+      a { background: $crumbs_bg; }
+    }
+  }
+  #user_menu {
+    float: right;
+    padding-right: 30px;
+
+    div {
+      line-height: $height;
+    }
   }
 }
 

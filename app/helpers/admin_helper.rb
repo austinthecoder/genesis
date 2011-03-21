@@ -22,8 +22,8 @@ module AdminHelper
     @crumbs_menu_link ||= current_menu.ancestors.map(&:object)
   end
 
-  def current_menu_links
-    @current_menu_links ||= current_menu.children.map(&:object)
+  def current_menus
+    @current_menus ||= current_menu.children
   end
 
   def current_menu
@@ -52,8 +52,9 @@ module AdminHelper
           end
         end
       end
+
       t.add Link("Theme", admin_theme_path) do |t|
-        t.add Link("New Template", new_admin_template_path, :post => admin_templates_path)
+        t.add Link("Add a template", new_admin_template_path, :post => admin_templates_path)
         if @tpl && !@tpl.new_record?
           t.add Link("Template :: #{@tpl.name_was}", edit_admin_template_path(@tpl)) do |t|
             t.add Link("Template data", admin_template_fields_path(@tpl)) do |t|
@@ -64,6 +65,8 @@ module AdminHelper
           end
         end
       end
+
+      t.add Link("My Profile", edit_user_registration_path)
     end
   end
 

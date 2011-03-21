@@ -277,51 +277,64 @@ var {
 }
 
 /* line 1, ../../app/stylesheets/_layout.scss */
-#menu {
+#header {
   background: url("/images/top-shadow.png") repeat-x left bottom;
   margin-bottom: -1px;
 }
-/* line 5, ../../app/stylesheets/_layout.scss */
-#menu a {
+/* line 7, ../../app/stylesheets/_layout.scss */
+#header #menu {
+  float: left;
+}
+/* line 10, ../../app/stylesheets/_layout.scss */
+#header #menu a {
   color: #fff;
   display: block;
   font-weight: bold;
   line-height: 35px;
   padding: 0 30px;
 }
-/* line 12, ../../app/stylesheets/_layout.scss */
-#menu ul {
+/* line 17, ../../app/stylesheets/_layout.scss */
+#header #menu ul {
   margin: 0;
 }
-/* line 13, ../../app/stylesheets/_layout.scss */
-#menu li {
+/* line 18, ../../app/stylesheets/_layout.scss */
+#header #menu li {
   list-style: none;
   float: left;
   text-transform: upcase;
 }
-/* line 18, ../../app/stylesheets/_layout.scss */
-#menu li.active {
+/* line 23, ../../app/stylesheets/_layout.scss */
+#header #menu li.active {
   background: url("/images/right-shadow.png") repeat-y right top;
   border-left: 1px solid #474747;
   padding-right: 4px;
 }
-/* line 23, ../../app/stylesheets/_layout.scss */
-#menu li.active a {
+/* line 28, ../../app/stylesheets/_layout.scss */
+#header #menu li.active a {
   background: #383838;
 }
+/* line 31, ../../app/stylesheets/_layout.scss */
+#header #user_menu {
+  float: right;
+  padding-right: 30px;
+}
+/* line 35, ../../app/stylesheets/_layout.scss */
+#header #user_menu div {
+  line-height: 35px;
+}
 
-/* line 27, ../../app/stylesheets/_layout.scss */
+/* line 41, ../../app/stylesheets/_layout.scss */
 #crumbs {
   border-top: 1px solid #474747;
   border-bottom: 1px solid #232323;
   background: #383838;
   padding: 10px 30px;
 }
-/* line 34, ../../app/stylesheets/_layout.scss */
+/* line 48, ../../app/stylesheets/_layout.scss */
 #crumbs ul {
   margin: 0;
 }
-/* line 37, ../../app/stylesheets/_layout.scss */
+/* line 51, ../../app/stylesheets/_layout.scss */
 #crumbs ul li {
   background: url("/images/crumb_arrow.png") no-repeat right center;
   display: block;
@@ -331,7 +344,7 @@ var {
   padding-right: 22px;
   margin-right: 8px;
 }
-/* line 46, ../../app/stylesheets/_layout.scss */
+/* line 60, ../../app/stylesheets/_layout.scss */
 #crumbs ul li.last {
   background: none;
   font-size: 2em;
@@ -339,27 +352,27 @@ var {
   padding: 0;
 }
 
-/* line 55, ../../app/stylesheets/_layout.scss */
+/* line 69, ../../app/stylesheets/_layout.scss */
 #content {
   border-top: 1px solid #474747;
   background: #383838;
 }
-/* line 60, ../../app/stylesheets/_layout.scss */
+/* line 74, ../../app/stylesheets/_layout.scss */
 #content #main {
   float: left;
   width: 70%;
 }
-/* line 65, ../../app/stylesheets/_layout.scss */
+/* line 79, ../../app/stylesheets/_layout.scss */
 #content #sidebar {
   float: right;
   width: 30%;
 }
-/* line 69, ../../app/stylesheets/_layout.scss */
+/* line 83, ../../app/stylesheets/_layout.scss */
 #content #sidebar #sidebar_inner {
   padding: 20px 30px;
 }
 
-/* line 73, ../../app/stylesheets/_layout.scss */
+/* line 87, ../../app/stylesheets/_layout.scss */
 #footer {
   background: url("/images/bot-shadow.png") repeat-x left top;
   padding: 20px 30px;

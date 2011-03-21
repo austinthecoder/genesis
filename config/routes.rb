@@ -1,7 +1,11 @@
 Genesis::Application.routes.draw do
 
   scope "admin" do
-    devise_for :users, :controllers => {:sessions => "admin/users/sessions"}
+    devise_for :users,
+      :controllers => {
+        :sessions => "admin/users/sessions",
+        :registrations => "admin/users/registrations"
+      }
   end
 
   namespace "admin" do

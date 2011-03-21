@@ -6,12 +6,19 @@
     = stylesheet_link_tag 'admin'
     = javascript_include_tag 'admin'
   %body
-    #menu
-      %ul
-        - main_menus.each do |menu|
-          %li{:class => ('active' if current_menu.path.include?(menu))}
-            = link_to menu.object.title, menu.object.path
-        %li= link_to "Sign out", destroy_user_session_path
+    #header
+      #menu
+        %ul
+          - main_menus.each do |menu|
+            %li{:class => ('active' if current_menu.path.include?(menu))}
+              = link_to menu.object.title, menu.object.path
+        .clear
+      #user_menu
+        %div
+          Welcome,
+          = link_to current_user.name, edit_user_registration_path
+          |
+          = link_to "Sign out", destroy_user_session_path
       .clear
     #crumbs
       %ul
@@ -32,10 +39,11 @@
       #sidebar
         #sidebar_inner
           = yield :sidebar
-          %h3 Menu
-          %ul
-            - current_menu_links.each do |link|
-              %li= link_to link.title, link.path
+          - if current_menus.present?
+            %h3 Menu
+            %ul
+              - current_menus.each do |menu|
+                %li= link_to menu.object.title, menu.object.path
       .clear
     #footer
       [footer]

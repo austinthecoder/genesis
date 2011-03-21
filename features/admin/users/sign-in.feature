@@ -29,6 +29,7 @@ Feature: Admin Sign-in
     Given a site
     And a user for that site with the attributes:
       | Email                 | steve@example.com |
+      | Name                  | Steve Smith       |
       | Password              | secret            |
       | Password Confirmation | secret            |
 
@@ -38,3 +39,4 @@ Feature: Admin Sign-in
       | Password | secret           |
     And I press "Sign in"
     Then I should see "Signed in successfully"
+    And I should see "Welcome, Steve Smith"

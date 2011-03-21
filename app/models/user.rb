@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     :presence => {:on => :create},
     :confirmation => {:if => :password_required?},
     :length => {:within => 6..20, :if => :password_required?}
+  validates :name, :presence => true
 
   class << self
     def find_for_authentication(conditions)

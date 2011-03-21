@@ -11,6 +11,8 @@ describe User, 'validations' do
 
     it { should accept_values_for(:email, 'a@b.com') }
 
+    it { should_not accept_values_for(:name, nil, '', ' ') }
+
     it "requires email to be unique" do
       Factory(:user, :email => 'a@b.com')
       should_not accept_values_for(:email, 'a@b.com', 'A@b.com')
