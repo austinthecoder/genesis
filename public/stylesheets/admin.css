@@ -504,7 +504,7 @@ form .footer {
 
 /* line 43, ../../app/stylesheets/admin.scss */
 body {
-  background: #303030;
+  background: #303030 url("/images/rust-18.png");
   color: #fff;
   font-family: "Droid Sans", Helvetica, sans-serif;
 }

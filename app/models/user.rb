@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable, :rememberable, :trackable, :authentication_keys => [:email, :site_id]
+  devise :database_authenticatable, :registerable, :rememberable, :trackable,
+    :authentication_keys => [:email, :site_id]
 
   ### associations ###
   belongs_to :site

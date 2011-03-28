@@ -41,7 +41,7 @@ $success_color: #6060ff;
 //////////////////////////////////////////////////
 
 body {
-  background: $body_bg;
+  background: $body_bg url($images_path + '/rust-18.png');
   color: #fff;
   font-family: "Droid Sans", Helvetica, sans-serif;
 }

@@ -9,9 +9,9 @@
     #header
       #menu
         %ul
-          - main_menus.each do |menu|
-            %li{:class => ('active' if current_menu.path.include?(menu))}
-              = link_to menu.object.title, menu.object.path
+          - main_menu.each do |mi|
+            %li{:class => ('active' if current_menu_item.path.include?(mi))}
+              = link_to mi.title, mi.uri
         .clear
       #user_menu
         %div
@@ -22,9 +22,9 @@
       .clear
     #crumbs
       %ul
-        - crumbs_menu_link.each do |link|
-          %li= link_to link.title, link.path
-        %li.last= current_menu.object.title
+        - crumbs.each do |mi|
+          %li= link_to mi.title, mi.uri
+        %li.last= current_menu_item.title
       .clear
     #content
       #main
@@ -39,11 +39,11 @@
       #sidebar
         #sidebar_inner
           = yield :sidebar
-          - if current_menus.present?
+          - if current_menu.present?
             %h3 Menu
             %ul
-              - current_menus.each do |menu|
-                %li= link_to menu.object.title, menu.object.path
+              - current_menu.each do |mi|
+                %li= link_to mi.title, mi.uri
       .clear
     #footer
       [footer]
