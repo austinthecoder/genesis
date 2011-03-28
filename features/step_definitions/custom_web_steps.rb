@@ -1,11 +1,3 @@
-# When /^(.+) within ([^:]+):$/ do |step, scope_str, table|
-#   with_scope(scope_to(scope_str)) { When "#{step}:", table }
-# end
-#
-# When /^(.+) within ([^:]+)$/ do |step, scope_str|
-#   with_scope(scope_to(scope_str)) { When step }
-# end
-
 When /^I follow:$/ do |table|
   table.raw.flatten.each do |link|
     When %{I follow "#{link}"}
