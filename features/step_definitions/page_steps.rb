@@ -66,34 +66,3 @@ When /^I remove the "([^"]*)" page$/ do |page_title|
     And I press "remove" within the row for the "#{page_title}" page
   }
 end
-
-### navigation ###
-
-When /^I visit the pages page$/ do
-  When %{I follow "Pages"}
-end
-
-When /^I visit the page for (that page)$/ do |page|
-  steps %{
-    When I visit the pages page
-    And I follow "#{page.title}"
-  }
-end
-
-When /^I visit the new page page$/ do
-  steps %{
-    When I visit the pages page
-    And I follow "Add the Home page"
-  }
-end
-
-Given /^I visit the new subpage page for the "([^"]*)" page$/ do |page_title|
-  steps %{
-    When I visit the pages page
-    And I follow "add subpage" within the page with the title "#{page_title}"
-  }
-end
-
-When /^I visit the new subpage page for (that page)$/ do |page|
-  When %{I visit the new subpage page for the "#{page.title}" page}
-end

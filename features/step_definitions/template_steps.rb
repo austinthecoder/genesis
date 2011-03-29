@@ -41,29 +41,6 @@ When /^I add a "([^"]*)" template:$/ do |tpl_name, tpl_content|
   }
 end
 
-### navigation ###
-
-When /^I visit the new template page$/ do
-  steps %{
-    When I follow:
-      | Theme | Add a template |
-  }
-end
-
-When /^I visit the page for (that template)$/ do |tpl|
-  steps %{
-    When I follow:
-      | Theme | #{tpl.name} |
-  }
-end
-
-When /^I visit the page for the "([^"]*)" template$/ do |template_name|
-  steps %{
-    When I follow:
-      | Theme | #{template_name} |
-  }
-end
-
 ##################################################
 
 Then /^the template's content field should contain "([^"]*)"$/ do |value|
