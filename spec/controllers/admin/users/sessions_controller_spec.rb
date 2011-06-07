@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe Admin::Users::SessionsController do
 
-  # before(:all) { @user = Factory(:user) }
-
   before do
     @domain = "example.com"
     request.host = @domain
     request.env["devise.mapping"] = Devise.mappings[:user]
+    # @user = Factory(:user)
     # sign_in :user, @user
     @params = HashWithIndifferentAccess.new
   end

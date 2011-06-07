@@ -6,7 +6,7 @@ namespace :seed do
       :name => 'Austin Schneider',
       :password => 'secret',
       :password_confirmation => 'secret',
-      :site => Site.create!(:domain => 'app.local')
+      :site => Site.create!(:domain => 'genesis.dev')
     )
   end
 end

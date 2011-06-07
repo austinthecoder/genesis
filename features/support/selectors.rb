@@ -8,7 +8,7 @@ module HtmlSelectorsHelpers
   def selector_for(locator)
     case locator
 
-    when /the page$/ then "html > body"
+    when /^the page$/ then "html > body"
 
     when "the fields table" then "table.fields"
 
@@ -25,19 +25,16 @@ module HtmlSelectorsHelpers
     when "the form" then "form"
 
     when "the list of pages" then ".pages"
-    when /the page with the title "([^"]*)"/
-      page = Page.find_by_title($1)
-      "#page_#{page.id}"
-    when /the row for (the "([^"]*)" page)/
-      page = Transform($1)
-      "#page_#{page.id}"
-    when /the row for (that page)/ then
-      page = Transform($1)
-      "#page_#{page.id}"
+    when /^the page with the title "([^"]*)"$/
+      "#page_#{Page.find_by_title($1).id}"
+    when /^the row for (the "([^"]*)" page)$/
+      "#page_#{Transform($1).id}"
+    when /^the row for (that page)$/ then
+      "#page_#{Transform($1).id}"
 
     when "the fields" then ".fields"
-    when /the row for (that field)/ then "#field_#{Transform($1).id}"
-    when /the row for the "([^"]*)" field/
+    when /^the row for (that field)$/ then "#field_#{Transform($1).id}"
+    when /^the row for the "([^"]*)" field$/
       fields = Field.where(:name => $1)
       field = case fields.size
         when 0

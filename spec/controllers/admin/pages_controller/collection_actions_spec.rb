@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe Admin::PagesController, 'collection actions' do
 
-  before(:all) { @user = Factory(:user) }
-
   before do
+    @user = Factory(:user)
     sign_in :user, @user
     @params = HashWithIndifferentAccess.new
   end

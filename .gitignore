@@ -1,6 +1,7 @@
 .bundle
 .rspec
 .rvmrc
+.sass-cache/
 config/database.yml
 coverage.data
 coverage/*

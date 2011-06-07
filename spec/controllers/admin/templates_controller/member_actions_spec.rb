@@ -2,11 +2,10 @@ require 'spec_helper'
 
 describe Admin::TemplatesController, "member actions" do
 
-  before(:all) { @user = Factory(:user) }
-
   before do
+    @user = Factory(:user)
     sign_in :user, @user
-    @tpl = Factory(:template, :user => @user)
+    @tpl = Factory(:template, :user => @user, :updated_at => 10.minutes.ago)
     @params = HashWithIndifferentAccess.new(:id => @tpl.id)
   end
 
@@ -81,7 +80,7 @@ describe Admin::TemplatesController, "member actions" do
         it { response.should render_template(:edit) }
 
         it "does not update the template" do
-          Template.find(@tpl.id).updated_at.should eq(@updated_at)
+          Template.find(@tpl.id).updated_at.to_i.should eq(@updated_at.to_i)
         end
       end
     end

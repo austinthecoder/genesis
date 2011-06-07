@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Admin::ThemesController do
 
-  before(:all) { @user = Factory(:user) }
-
-  before { sign_in :user, @user }
+  before do
+    @user = Factory(:user)
+    sign_in :user, @user
+  end
 
   describe "GET show" do
     before { get :show }

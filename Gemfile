@@ -1,33 +1,32 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
-gem 'pg', '0.10.1'
-gem 'devise', '1.2.1'
-gem 'haml', '3.0.25'
-gem 'simple_form', '1.3.1'
-gem 'compass', '0.10.6'
+gem 'rails', '3.0.7'
+gem 'mysql2', '0.2.7'
+gem 'haml-rails', '0.3.4'
+gem 'compass', '0.11.1'
+gem 'devise', '1.3.4'
+gem 'simple_form', '1.4.0'
 gem 'basic_tree', '1.0.2'
-gem 'paper_trail', '2.0.2'
+gem 'paper_trail', '2.2.4'
 gem 'attribute_normalizer', '0.3.1'
-gem 'ancestry', '1.2.3'
-gem 'cancan', '1.6.3'
+gem 'ancestry', '1.2.4'
+gem 'cancan', '1.6.5'
 
 group :test do
-  gem 'spork', '0.9.0.rc4'
-  gem 'guard-cucumber', '0.3.0'
-  gem 'guard-rspec', '0.2.0'
-  gem 'guard-spork', '0.1.6'
-  gem 'growl', '1.0.3'
+  # required to run tests
+  gem 'cucumber-rails', '0.4.1'
+  gem 'rspec-rails', '2.6.1'
+  gem 'capybara', '0.4.1.2'
+  gem 'database_cleaner', '0.6.7'
+  gem 'launchy', '0.4.0'
+  gem 'webmock', '1.6.4'
+  gem 'accept_values_for', '0.4.3'
   gem 'factory_girl', '2.0.0.beta2'
   gem 'factory_girl_rails', '1.1.beta1'
+
+  # not required to run tests
   gem 'cover_me', '1.0.0.rc6'
-  gem 'capybara', '0.4.1.2'
-  gem 'rspec-rails', '2.5.0'
-  gem 'cucumber-rails', '0.4.0'
-  gem 'database_cleaner', '0.6.6'
-  gem 'launchy', '0.3.7'
-  gem 'webmock', '1.6.2'
-  gem 'accept_values_for', '0.4.2'
+  gem 'spork', '0.9.0.rc8'
 end
 
 group :development do

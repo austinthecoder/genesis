@@ -502,48 +502,129 @@ form .footer {
   margin-top: 30px;
 }
 
-/* line 43, ../../app/stylesheets/admin.scss */
+/* line 1, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror {
+  background: #fff;
+  color: #333;
+  overflow: auto;
+  height: 300px;
+  line-height: 1em;
+  font-family: monospace;
+  _position: relative;
+}
+
+/* line 11, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-gutter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #f7f7f7;
+  border-right: 1px solid #eee;
+  min-width: 2em;
+  height: 100%;
+}
+
+/* line 20, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-gutter-text {
+  color: #aaa;
+  text-align: right;
+  padding: .4em .2em .4em .4em;
+}
+
+/* line 25, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-lines {
+  padding: .4em;
+}
+
+/* line 28, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror pre {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: inherit;
+}
+
+/* line 39, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-cursor {
+  z-index: 10;
+  position: absolute;
+  visibility: hidden;
+  border-left: 1px solid black !important;
+}
+
+/* line 45, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-focused .CodeMirror-cursor {
+  visibility: visible;
+}
+
+/* line 48, ../../app/stylesheets/_codemirror.scss */
+span.CodeMirror-selected {
+  background: #ccc !important;
+  color: HighlightText !important;
+}
+
+/* line 52, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-focused span.CodeMirror-selected {
+  background: Highlight !important;
+}
+
+/* line 55, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-matchingbracket {
+  color: #0f0 !important;
+}
+
+/* line 58, ../../app/stylesheets/_codemirror.scss */
+.CodeMirror-nonmatchingbracket {
+  color: #f22 !important;
+}
+
+/* line 44, ../../app/stylesheets/admin.scss */
 body {
   background: #303030 url("/images/rust-18.png");
   color: #fff;
   font-family: "Droid Sans", Helvetica, sans-serif;
 }
 
-/* line 49, ../../app/stylesheets/admin.scss */
+/* line 50, ../../app/stylesheets/admin.scss */
 a {
   color: #ccf;
   text-decoration: none;
 }
 
-/* line 54, ../../app/stylesheets/admin.scss */
+/* line 55, ../../app/stylesheets/admin.scss */
 h1, h2, h3 {
   font-weight: normal;
 }
 
-/* line 60, ../../app/stylesheets/admin.scss */
+/* line 61, ../../app/stylesheets/admin.scss */
 #flash {
   padding: 20px 20px 0 20px;
 }
-/* line 63, ../../app/stylesheets/admin.scss */
+/* line 64, ../../app/stylesheets/admin.scss */
 #flash .notice, #flash .alert {
   color: #fff;
   padding: 2px 10px;
 }
-/* line 67, ../../app/stylesheets/admin.scss */
+/* line 68, ../../app/stylesheets/admin.scss */
 #flash .notice {
   background: #6060ff;
 }
-/* line 68, ../../app/stylesheets/admin.scss */
+/* line 69, ../../app/stylesheets/admin.scss */
 #flash .alert {
   background: #903030;
 }
 
-/* line 71, ../../app/stylesheets/admin.scss */
+/* line 72, ../../app/stylesheets/admin.scss */
 .section {
   padding: 20px 30px;
 }
 
-/* line 78, ../../app/stylesheets/admin.scss */
+/* line 79, ../../app/stylesheets/admin.scss */
 .pages .actions {
   float: right;
 }

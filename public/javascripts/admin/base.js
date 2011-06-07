@@ -10,3 +10,13 @@ WebFontConfig = {
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(wf, s);
 })();
+
+//////////////////////////////////////////////////
+
+$(function() {
+  var editor = CodeMirror.fromTextArea($('form.page textarea')[0], {
+    mode: "htmlmixed",
+    lineNumbers: true,
+    tabMode: 'indent'
+  });
+});

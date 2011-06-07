@@ -2,11 +2,10 @@ require 'spec_helper'
 
 describe Admin::PagesController, "member actions" do
 
-  before(:all) { @user = Factory(:user) }
-
   before do
+    @user = Factory(:user)
     sign_in :user, @user
-    @page = Factory(:page, :user => @user)
+    @page = Factory(:page, :user => @user, :updated_at => 10.minutes.ago)
     @params = HashWithIndifferentAccess.new(:id => @page.id)
   end
 
@@ -56,23 +55,24 @@ describe Admin::PagesController, "member actions" do
   describe "PUT update" do
     context "when the id matches a page belonging to the user" do
       context "with valid page params" do
-        before { @params[:page] = {:title => 'My Page'} }
+        before { @params[:page] = {:title => 'New title'} }
 
-        it "updates the page from the params" do
-          page = mock_model(Page)
-          controller.current_user.pages.stub!(:find => page)
-          page.should_receive(:update_attributes!).with(@params[:page])
+        it "updates the page" do
+          updated_at = @page.updated_at
           put :update, @params
+          @page.reload.updated_at.to_s.should_not == updated_at.to_s
         end
 
-        it "sets a flash notice" do
-          put :update, @params
-          flash.notice.should eq("Page was saved.")
+        describe "updated page" do
+          subject { @page.reload }
+          before { put :update, @params }
+          its(:title) { should == 'New title' }
         end
 
-        it "redirects to the edit page" do
-          put :update, @params
-          response.should redirect_to(edit_admin_page_url(@page))
+        context "after requesting" do
+          before { put :update, @params }
+          it { flash.notice.should eq("Page was saved.") }
+          it { response.should redirect_to(edit_admin_page_url(@page)) }
         end
       end
 
@@ -83,7 +83,6 @@ describe Admin::PagesController, "member actions" do
         end
 
         it { flash.alert.should eq("Houston, we have some problems.") }
-
         it { response.should render_template(:edit) }
       end
     end
