@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Page do
+describe Page, "instance methods" do
 
   subject { Factory.build(:page) }
 
-  describe "slug_editable?" do
+  describe "#slug_editable?" do
     context "when it is root" do
       it { should_not be_slug_editable }
     end
