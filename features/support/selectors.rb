@@ -8,7 +8,8 @@ module HtmlSelectorsHelpers
   def selector_for(locator)
     case locator
 
-    when /^the page$/ then "html > body"
+    when "the page"
+      "html > body"
 
     when "the fields table" then "table.fields"
 
@@ -51,7 +52,7 @@ module HtmlSelectorsHelpers
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
-    #  when /the (notice|error|info) flash/
+    #  when /^the (notice|error|info) flash$/
     #    ".flash.#{$1}"
 
     # You can also return an array to use a different selector
@@ -63,7 +64,7 @@ module HtmlSelectorsHelpers
     # This allows you to provide a quoted selector as the scope
     # for "within" steps as was previously the default for the
     # web steps:
-    when /"(.+)"/
+    when /^"(.+)"$/
       $1
 
     else

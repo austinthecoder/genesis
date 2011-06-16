@@ -29,15 +29,6 @@ class Field < ActiveRecord::Base
     errors.add(:field_type, "cannot be changed") if field_type_changed?
   end
 
-  ### callbacks ###
-  after_create do
-    pages.each do |p|
-      unless contents.find_by_page_id(p.id)
-        contents.create!(:page => p)
-      end
-    end
-  end
-
   def human_field_type
     TYPE_OPTIONS[self[:field_type]]
   end

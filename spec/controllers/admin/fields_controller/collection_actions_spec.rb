@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe Admin::FieldsController, "collection actions" do
 
-  before(:all) { @user = Factory(:user) }
-
   before do
+    @user = Factory(:user)
     sign_in :user, @user
     @tpl = Factory(:template, :user => @user)
     @params = HashWithIndifferentAccess.new(:template_id => @tpl.id)
@@ -58,27 +57,37 @@ describe Admin::FieldsController, "collection actions" do
   describe "POST create" do
     context "when the template_id matches a template belonging to the current user" do
       context "with valid field params" do
-        before do
-          @params.merge!(:field => {:name => 'foo', :field_type => 'short_text'})
-          post :create, @params
+        field_attrs = {:name => 'foo', :field_type => 'short_text'}
+        before { @params.merge!(:field => field_attrs) }
+
+        it "creates a field" do
+          lambda { post :create, @params }.should change { @tpl.fields.count }.by(1)
         end
 
-        it "creates a field for the template with attributes from the params" do
-          assigns(:tpl).reload
-          assigns(:tpl).fields.size.should eq(1)
-          @params[:field].each { |k, v| assigns(:tpl).fields[0].send(k).should eq(v) }
+        describe "the created field" do
+          subject { @tpl.fields.last }
+          before { post :create, @params }
+
+          field_attrs.each do |name, value|
+            its(name) { should eq(value) }
+          end
         end
 
-        it { flash.notice.should eq("Kablam! Added!") }
-        it { response.should redirect_to(admin_template_fields_url(assigns(:tpl))) }
+        context "after request" do
+          before { post :create, @params }
+          it { response.should redirect_to(admin_template_fields_url(assigns(:tpl))) }
+        end
       end
 
       context "with invalid field params" do
-        before { post :create, @params }
+        it "doesn't create a field" do
+          lambda { post :create, @params }.should_not change { Field.count }
+        end
 
-        it { Field.count.should eq(0) }
-        it { flash.alert.should eq("Dag nabbit. There were some problems.") }
-        it { response.should render_template(:index) }
+        context "after request" do
+          before { post :create, @params }
+          it { response.should render_template(:index) }
+        end
       end
     end
   end

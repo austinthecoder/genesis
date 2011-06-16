@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
-gem 'mysql2', '0.2.7'
+gem 'rails', '3.0.9'
+gem 'mysql2', '0.2.8'
 gem 'haml-rails', '0.3.4'
-gem 'compass', '0.11.1'
+gem 'compass', '0.11.3'
 gem 'devise', '1.3.4'
-gem 'simple_form', '1.4.0'
+gem 'simple_form', '1.4.1'
 gem 'basic_tree', '1.0.2'
 gem 'paper_trail', '2.2.4'
 gem 'attribute_normalizer', '0.3.1'
@@ -14,9 +14,8 @@ gem 'cancan', '1.6.5'
 
 group :test do
   # required to run tests
-  gem 'cucumber-rails', '0.4.1'
+  gem 'cucumber-rails', '0.5.2'
   gem 'rspec-rails', '2.6.1'
-  gem 'capybara', '0.4.1.2'
   gem 'database_cleaner', '0.6.7'
   gem 'launchy', '0.4.0'
   gem 'webmock', '1.6.4'

@@ -12,7 +12,14 @@ class Page < ActiveRecord::Base
       joins(:field => :template)
     end
   end
-  has_many :fields, :through => :template
+  has_many :fields, :through => :template do
+    # TODO: test
+    def create_contents!
+      each do |field|
+        field.contents.create!(:page => proxy_owner)
+      end
+    end
+  end
 
   accepts_nested_attributes_for :contents
 
@@ -26,14 +33,6 @@ class Page < ActiveRecord::Base
     :format => {:with => /^[a-z0-9\-_]+$/i, :unless => :is_root?}
   validates :user_id, :presence => true
   validates :title, :presence => true
-
-  ### callbacks ###
-  after_save do
-    if template_id_changed?
-      contents.each(&:destroy)
-      fields.each { |f| contents.create!(:field => f) }
-    end
-  end
 
   def slug_editable?
     !is_root?

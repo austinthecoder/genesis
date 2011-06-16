@@ -7,7 +7,27 @@ class User < ActiveRecord::Base
   belongs_to :site
   has_many :templates
   has_many :fields, :through => :templates
-  has_many :pages
+  has_many :pages do
+    # TODO: test
+    def add!(parent_page, *args)
+      new(*args).tap do |page|
+        page.parent = parent_page
+        page.save!
+        page.fields.create_contents!
+      end
+    end
+
+    # TODO: test
+    def update!(page, *args)
+      previous_template_id = page.template_id
+      page.update_attributes!(*args)
+      if page.template_id != previous_template_id
+        page.contents.each(&:destroy)
+        page.fields.create_contents!
+      end
+      page
+    end
+  end
 
   ### validations ###
   validates :email,

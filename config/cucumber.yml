@@ -5,7 +5,7 @@ rerun_opts = if rerun.to_s.strip.empty?
 else
   "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} #{rerun}"
 end
-std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} -r features/ --strict --tags ~@wip"
+std_opts = "-r features/ --format #{ENV['CUCUMBER_FORMAT'] || 'progress'} --strict --tags ~@wip"
 %>
 default: --drb <%= std_opts %> features
 wip: --drb --tags @wip:3 --wip features

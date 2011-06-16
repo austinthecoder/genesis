@@ -2,7 +2,7 @@ class Admin::FieldsController < AdminController
 
   before_filter :find_field, :only => %w(edit update destroy)
   before_filter :find_template, :only => %w(index create edit update destroy)
-  before_filter :build_field, :only => %w(index create)
+  before_filter :build_field, :only => %w(index)
   before_filter :assign_fields, :only => %w(index create)
 
   ##################################################
@@ -11,9 +11,10 @@ class Admin::FieldsController < AdminController
   end
 
   def create
-    @field.save!
+    @tpl.fields.add!(params[:field])
     redirect_to admin_template_fields_url(@tpl), :notice => "Kablam! Added!"
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
+    @field = e.record
     flash.alert = "Dag nabbit. There were some problems."
     render :index
   end
