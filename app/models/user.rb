@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   has_many :templates
   has_many :fields, :through => :templates
   has_many :pages do
-    # TODO: test
     def add!(parent_page, *args)
       new(*args).tap do |page|
         page.parent = parent_page
@@ -17,7 +16,6 @@ class User < ActiveRecord::Base
       end
     end
 
-    # TODO: test
     def update!(page, *args)
       previous_template_id = page.template_id
       page.update_attributes!(*args)

@@ -1,6 +1,14 @@
 require 'rubygems'
 require 'spork'
 
+module Benchmarker
+  def bm(label = 'bm')
+    s = Time.now
+    yield
+    puts "#{label}: #{Time.now - s}"
+  end
+end
+
 Spork.prefork do
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
@@ -14,6 +22,8 @@ Spork.prefork do
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher, :type => :model
     config.include Devise::TestHelpers, :type => :controller
+    config.include Benchmarker
+
     # == Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

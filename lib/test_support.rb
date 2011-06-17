@@ -1,0 +1,1 @@
+Dir[Rails.root.join("lib/test_support/*")].each { |f| require f }

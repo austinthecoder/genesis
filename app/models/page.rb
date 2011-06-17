@@ -13,11 +13,8 @@ class Page < ActiveRecord::Base
     end
   end
   has_many :fields, :through => :template do
-    # TODO: test
     def create_contents!
-      each do |field|
-        field.contents.create!(:page => proxy_owner)
-      end
+      each { |f| f.contents.create!(:page => proxy_owner) }
     end
   end
 

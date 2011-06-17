@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Field do
+describe Field, "instance methods" do
 
   subject { Field.new }
 
