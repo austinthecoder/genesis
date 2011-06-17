@@ -99,8 +99,7 @@ describe Admin::PagesController, 'collection actions' do
           @user.pages.size.should eq(@nbr_pages + 1)
           @newest_page.title.should eq("My Page")
         end
-
-        it { flash.notice.should eq("Page was saved.") }
+        
         it { response.should redirect_to(edit_admin_page_url(@newest_page)) }
       end
 
@@ -114,8 +113,7 @@ describe Admin::PagesController, 'collection actions' do
         it "does not create a page" do
           Page.count.should eq(@page_count)
         end
-
-        it { flash.alert.should eq("Houston, we have some problems.") }
+        
         it { response.should render_template(:new) }
       end
     end

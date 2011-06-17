@@ -71,7 +71,6 @@ describe Admin::PagesController, "member actions" do
 
         context "after requesting" do
           before { put :update, @params }
-          it { flash.notice.should eq("Page was saved.") }
           it { response.should redirect_to(edit_admin_page_url(@page)) }
         end
       end
@@ -81,8 +80,6 @@ describe Admin::PagesController, "member actions" do
           @params[:page] = {:title => ''}
           put :update, @params
         end
-
-        it { flash.alert.should eq("Houston, we have some problems.") }
         it { response.should render_template(:edit) }
       end
     end

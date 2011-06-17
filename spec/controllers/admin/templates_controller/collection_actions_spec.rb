@@ -42,8 +42,6 @@ describe Admin::TemplatesController, "collection actions" do
         post :create, @params
       end
 
-      it { flash.notice.should eq("Wowza weeza! Template was created!") }
-
       it "creates a template for the current user" do
         @user.templates.count.should eq(1)
       end
@@ -64,8 +62,7 @@ describe Admin::TemplatesController, "collection actions" do
         @nbr_tpls = Template.count
         post :create
       end
-
-      it { flash.alert.should eq("Houston, we have some problems.") }
+      
       it { response.should render_template(:new) }
 
       it "doesn't create a template" do

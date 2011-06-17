@@ -66,8 +66,7 @@ describe Admin::FieldsController, "member actions" do
           @params[:field] = {:name => ''}
           put :update, @params
         end
-
-        it { flash.alert.should eq("Houston, we have some problems.") }
+        
         it { response.should render_template(:edit) }
       end
 
@@ -76,8 +75,7 @@ describe Admin::FieldsController, "member actions" do
           @params[:field] = {:name => 'something'}
           put :update, @params
         end
-
-        it { flash.notice.should eq("Field was saved.") }
+        
         it { response.should redirect_to(admin_template_fields_url(@field.template)) }
       end
     end

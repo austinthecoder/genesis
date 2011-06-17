@@ -58,8 +58,7 @@ describe Admin::TemplatesController, "member actions" do
           @params[:template] = {:name => 'foosbars', :content => 'skeeza mcgeeza'}
           put :update, @params
         end
-
-        it { flash.notice.should eq("Template was saved.") }
+        
         it { response.should redirect_to(edit_admin_template_url(@tpl)) }
 
         it "updates the template from the params" do
@@ -75,8 +74,7 @@ describe Admin::TemplatesController, "member actions" do
           @params[:template] = {:name => ''}
           put :update, @params
         end
-
-        it { flash.alert.should eq("Houston, we have some problems.") }
+        
         it { response.should render_template(:edit) }
 
         it "does not update the template" do
