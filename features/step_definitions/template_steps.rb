@@ -1,3 +1,7 @@
+Given /^I have a template$/ do
+  When %{I add a template}
+end
+
 Given /^I have a "([^"]*)" template$/ do |tpl_name|
   When %{I add a "#{tpl_name}" template}
 end
@@ -17,11 +21,19 @@ When /^I fill in the template's content with "([^"]*)"$/ do |text|
   fill_in('template_content', :with => text)
 end
 
+Given /^I fill in the template's content with:$/ do |text|
+  fill_in('template_content', :with => text)
+end
+
 When /^I remove that template$/ do
   steps %{
     When I follow "Theme"
     And I press "remove" within the row for that template
   }
+end
+
+When /^I add a template$/ do
+  When %{I add a "Home" template}
 end
 
 When /^I add a "([^"]*)" template$/ do |tpl_name|
@@ -36,7 +48,10 @@ When /^I add a "([^"]*)" template:$/ do |tpl_name, tpl_content|
   steps %{
     When I visit the new template page
     And I fill in "Name" with "#{tpl_name}"
-    And I fill in the template's content with "#{tpl_content}"
+    And I fill in the template's content with:
+      """
+      #{tpl_content}
+      """
     And I press "Save this template"
   }
 end

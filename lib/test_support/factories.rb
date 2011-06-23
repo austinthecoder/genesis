@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :page do
     user
+    template
     title 'My Page'
   end
 

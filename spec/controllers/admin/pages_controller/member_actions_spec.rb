@@ -9,22 +9,18 @@ describe Admin::PagesController, "member actions" do
     @params = HashWithIndifferentAccess.new(:id => @page.id)
   end
 
-  {
-    :get => :edit,
-    :put => :update,
-    :get => :edit_template,
-    :delete => :destroy
-  }.each do |http_method, action|
+  [
+    [:get, :edit],
+    [:put, :update],
+    [:get, :edit_template],
+    [:delete, :destroy]
+  ].each do |http_method, action|
     describe "#{http_method.upcase} #{action}" do
       context "when the id matches a page belonging to the user" do
         before { send(http_method, action, @params) }
 
         it "assigns the page" do
           assigns(:page).should eq(@page)
-        end
-
-        it "assigns a template relation for the user" do
-          assigns(:tpls).should eq(@user.templates.order("created_at DESC"))
         end
       end
 
@@ -36,6 +32,20 @@ describe Admin::PagesController, "member actions" do
 
         it { response.code.should eq("404") }
         it { response.should render_template("admin/shared/not_found") }
+      end
+    end
+  end
+
+  [
+    [:get, :edit],
+    [:put, :update]
+  ].each do |http_method, action|
+    describe "#{http_method.upcase} #{action}" do
+      context "when the id matches a page belonging to the user" do
+        before { send(http_method, action, @params) }
+        it "assigns a template relation for the user" do
+          assigns(:tpls).should eq(@user.templates.order("created_at DESC"))
+        end
       end
     end
   end

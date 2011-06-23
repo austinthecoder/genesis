@@ -7,7 +7,7 @@ describe User, 'associations' do
 
     describe "#add!" do
       context "with valid attrs" do
-        before { @attrs = {:title => 'title932'} }
+        before { @attrs = {:title => 'title932', :template_id => '1'} }
 
         it "creates a page" do
           lambda { subject.add!(nil, @attrs) }.should change { Page.count }.by(1)
@@ -61,10 +61,8 @@ describe User, 'associations' do
 
     describe "#update!" do
       before do
-        @tpl1 = Factory(:template)
-        @tpl2 = Factory(:template)
-        @page = Factory(:page, :template => @tpl1).reload
-        @attrs = {:template_id => @tpl1.id, :title => 'title95032'}
+        @page = Factory(:page).reload
+        @attrs = {:template_id => @page.template_id, :title => 'title95032'}
         @contents = (1..2).map { Factory(:content, :page => @page) }
       end
 
@@ -78,7 +76,7 @@ describe User, 'associations' do
       end
 
       context "when the template changed" do
-        before { @attrs[:template_id] = @tpl2.id }
+        before { @attrs[:template_id] = Factory(:template).id }
 
         it "destroys all of the page's current content" do
           subject.update!(@page, @attrs)

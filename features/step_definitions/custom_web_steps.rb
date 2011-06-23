@@ -6,6 +6,10 @@ end
 
 ##################################################
 
+Then /^I should see:$/ do |text|
+  page.should have_content(text)
+end
+
 Then /^I should see each of the following:$/ do |table|
   table.raw.flatten.each do |text|
     page.should have_content(text)

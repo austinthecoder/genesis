@@ -1,7 +1,14 @@
 .section
-  - if @arranged_pages.empty?
-    %div
-      = link_to "Add the Home page", new_admin_page_path
+  - if @tpls.present?
+    - if @arranged_pages.empty?
+      %div
+        = link_to "Add the Home page", new_admin_page_path
 
-  .pages
-    = render "subtree", :arranged_pages => @arranged_pages
+    .pages
+      = render "subtree", :arranged_pages => @arranged_pages
+  - else
+    %h3 There are no templates
+    %p
+      Before creating pages, you must create a template.
+      = succeed '.' do
+        = link_to "Create one now", new_admin_template_path

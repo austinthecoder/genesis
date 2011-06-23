@@ -7,3 +7,4 @@ coverage.data
 coverage/*
 log/*.log
 tmp/
+todo.txt

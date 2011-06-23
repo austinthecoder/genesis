@@ -2,6 +2,12 @@ Given /^I have an? "([^"]*)" page for that template$/ do |page_title|
   When %{I add a "#{page_title}" page for that template}
 end
 
+Given /^I have an? "([^"]*)" page for that template:$/ do |page_title, table|
+  When %{I add a "#{page_title}" page for that template}
+  And "I fill in the following:", table
+  And %{I press "Save"}
+end
+
 Given /^I have an? "([^"]*)" page$/ do |page_title|
   When %{I add a "#{page_title}" page}
 end
@@ -12,6 +18,10 @@ end
 
 Given /^I have an? "([^"]*)" page for the "([^"]*)" page$/ do |page_title1, page_title2|
   When %{I add a "#{page_title1}" page for the "#{page_title2}" page}
+end
+
+Given /^I have an? "([^"]*)" page for that page for that template$/ do |page_title|
+  When %{I add a "#{page_title}" page for that page for that template}
 end
 
 ##################################################
@@ -65,4 +75,8 @@ When /^I remove the "([^"]*)" page$/ do |page_title|
     When I visit the pages page
     And I press "remove" within the row for the "#{page_title}" page
   }
+end
+
+When /^I visit "([^"]*)"$/ do |url|
+  visit url
 end

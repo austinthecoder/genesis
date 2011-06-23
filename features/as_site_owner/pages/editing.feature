@@ -4,6 +4,9 @@ Feature: Creating/Editing Pages
     Given a site
     And a user for that site
     And I am signed in as that user
+    Given I have a "Home" template
+
+##################################################
 
   Scenario: Validations
     When I visit the new page page
@@ -63,23 +66,13 @@ Feature: Creating/Editing Pages
 
 ##################################################
 
-  Scenario: Viewing the template field when there are no templates
-    When I visit the new page page
-    Then I should not see the "Template" field
-
-    When I add a "Home" page
-    Then I should not see the "Template" field
-
-##################################################
-
-  Scenario: Viewing the template field when there are templates
-    Given I have a "Home" template
-
+  Scenario: Viewing the template field
     When I visit the new page page
     Then I should see the "Template" field
 
     When I add a "Home" page
-    Then I should see the "Template" field
+    Then I should not see the "Template" field
+    And I should see "Template Home"
 
     When I add an "About" page for that page for that template
     Then I should not see the "Template" field
@@ -103,8 +96,7 @@ Feature: Creating/Editing Pages
 ##################################################
 
   Scenario: Viewing template-related fields
-    Given I have a "Home" template
-    And I have a "body" field for that template
+    Given I have a "body" field for that template
     And I have a "foot" field for that template
 
     When I add a "Home" page for that template
@@ -122,16 +114,10 @@ Feature: Creating/Editing Pages
     And I should see the fields:
       | Head | Foot |
 
-    When I remove that template
-    And I visit the page for that page
-    Then I should not see the fields:
-      | Head | Body | Foot |
-
 ##################################################
 
   Scenario: Saving template-related field content
-    Given I have a "Home" template
-    And I have a "body" field for that template
+    Given I have a "body" field for that template
     And I have a "Home" page for that template
 
     When I visit the page for that page
@@ -143,8 +129,7 @@ Feature: Creating/Editing Pages
 ##################################################
 
   Scenario: Changing templates
-    Given I have a "Home" template
-    And I have a "body" field for that template
+    Given I have a "body" field for that template
     And I have a "Blog" template
     And I have a "foot" field for that template
     And I have a "Home" page for that template

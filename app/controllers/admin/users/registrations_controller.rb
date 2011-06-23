@@ -1,5 +1,9 @@
-class Admin::Users::RegistrationsController < Devise::RegistrationsController
+module Admin
+  module Users
+    class RegistrationsController < Devise::RegistrationsController
 
-  layout 'admin'
+      layout 'admin'
 
+    end
+  end
 end

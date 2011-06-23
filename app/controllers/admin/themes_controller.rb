@@ -1,7 +1,9 @@
-class Admin::ThemesController < AdminController
+module Admin
+  class ThemesController < BaseController
 
-  def show
-    assign_templates
+    def show
+      assign_templates
+    end
+
   end
-
 end

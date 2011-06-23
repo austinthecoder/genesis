@@ -6,4 +6,6 @@
       - @tpls.each do |t|
         %tr{:class => "template_#{t.id}"}
           %td= link_to t.name, edit_admin_template_path(t)
-          %td= button_to "remove", admin_template_path(t), :method => "delete"
+          %td
+            - if t.pages.empty?
+              = button_to "remove", admin_template_path(t), :method => "delete"

@@ -30,6 +30,20 @@ class Page < ActiveRecord::Base
     :format => {:with => /^[a-z0-9\-_]+$/i, :unless => :is_root?}
   validates :user_id, :presence => true
   validates :title, :presence => true
+  validates :template_id, :presence => true
+
+  class << self
+    # example: /contact/our-company
+    def find_by_request_path(path)
+      Page.all.detect do |p|
+        ("/" + p.path.map(&:slug).tap(&:shift).join("/")) == path
+      end
+    end
+  end
+
+  def to_html
+    liquid_template.render('page' => Drop.new(self))
+  end
 
   def slug_editable?
     !is_root?
@@ -37,6 +51,12 @@ class Page < ActiveRecord::Base
 
   def can_destroy?
     new_record? || is_childless?
+  end
+
+  private
+
+  def liquid_template
+    @liquid_template ||= Liquid::Template.parse(template.content)
   end
 
 end

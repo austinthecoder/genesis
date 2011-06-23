@@ -9,6 +9,8 @@ Feature: Removing Templates
       some template content
       """
 
+##################################################
+
   Scenario: Removing it from the list
     When I remove that template
     Then I should see "Template was removed"
@@ -38,26 +40,8 @@ Feature: Removing Templates
 
 ##################################################
 
-  Scenario: After removing, template-related page fields are gone
-    Given I have a "body" field for that template
-    And I have a "Home" page for that template
+  Scenario: Can't remove templates with pages
+    Given I have a "Home" page for that template
 
-    When I remove that template
-    And I visit the page for that page
-    Then I should not see the fields:
-      | Template | Body |
-
-##################################################
-
-  Scenario: After restoring, template-related page fields are restored
-    Given I have a "body" field for that template
-    And I have a "Home" page for that template
-
-    When I visit the page for that page
-    And I fill in "Body" with "some content"
-    And I press "Save"
-    And I remove that template
-    And I press "Undo"
-    And I visit the page for that page
-    Then I should see "Template Home"
-    And the "Body" field should contain "some content"
+    When I follow "Theme"
+    Then I should not see "remove" within the row for that template

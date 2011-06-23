@@ -13,13 +13,13 @@ Genesis::Application.routes.draw do
       member { post :revert }
     end
 
-    resources :pages, :only => %w(index new create show edit update destroy) do
+    resources :pages, :except => %w(show) do
       member { get :edit_template }
 
       resources :pages, :only => %w(new create)
     end
 
-    resources :templates, :only => %w(new create edit update destroy) do
+    resources :templates, :except => %w(index show) do
       resources :fields, :only => %w(index create)
     end
 
@@ -29,5 +29,8 @@ Genesis::Application.routes.draw do
 
     root :to => "dashboard#index"
   end
+
+  root :to => 'pages#show'
+  match '*path' => 'pages#show'
 
 end

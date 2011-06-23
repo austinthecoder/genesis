@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe Template, "associations" do
   describe "fields" do
-    let(:template) { Factory(:template) }
-    subject { template.fields }
+    subject { @template.fields }
+
+    before { @template = Factory(:template) }
 
     describe "#add!" do
       context "with valid attributes" do
@@ -25,7 +26,7 @@ describe Template, "associations" do
         end
 
         context "when the field's template has pages" do
-          before { @pages = (1..2).map { Factory(:page, :template => template) } }
+          before { @pages = (1..2).map { Factory(:page, :template => @template) } }
 
           it "creates content for the field and pages" do
             subject.add!(field_attrs)

@@ -23,16 +23,24 @@ describe Admin::PagesController, 'collection actions' do
 
 ##################################################
 
-  {
-    :get => :new,
-    :post => :create
-  }.each do |http_method, action|
+  [
+    [:get, :index],
+    [:get, :new],
+    [:post, :create]
+  ].each do |http_method, action|
     describe "#{http_method.upcase} #{action}" do
       it "assigns a template relation for the user" do
         send(http_method, action, @params)
         assigns(:tpls).should eq(@user.templates.order("created_at DESC"))
       end
+    end
+  end
 
+  [
+    [:get, :new],
+    [:post, :create]
+  ].each do |http_method, action|
+    describe "#{http_method.upcase} #{action}" do
       context "when a page_id is present" do
         before do
           @page = Factory(:page, :user => @user)
@@ -89,7 +97,7 @@ describe Admin::PagesController, 'collection actions' do
       context "with valid page params" do
         before do
           @nbr_pages = controller.current_user.pages.size
-          @params[:page] = {:title => "My Page"}
+          @params[:page] = {:title => "My Page", :template_id => '1'}
           post :create, @params
           @user.reload
           @newest_page = @user.pages.order('id ASC').first
@@ -99,7 +107,7 @@ describe Admin::PagesController, 'collection actions' do
           @user.pages.size.should eq(@nbr_pages + 1)
           @newest_page.title.should eq("My Page")
         end
-        
+
         it { response.should redirect_to(edit_admin_page_url(@newest_page)) }
       end
 
@@ -113,7 +121,7 @@ describe Admin::PagesController, 'collection actions' do
         it "does not create a page" do
           Page.count.should eq(@page_count)
         end
-        
+
         it { response.should render_template(:new) }
       end
     end
@@ -128,7 +136,7 @@ describe Admin::PagesController, 'collection actions' do
         context "with valid page params" do
           before do
             @nbr_pages = @page.children.size
-            @params[:page] = {:title => "My Subpage", :slug => 'myslug'}
+            @params[:page] = {:title => "My Subpage", :slug => 'myslug', :template_id => '1'}
             post :create, @params
             @page.reload
             @newest_child = @page.children.order('id ASC').first

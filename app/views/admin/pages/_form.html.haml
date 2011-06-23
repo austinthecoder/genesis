@@ -9,15 +9,14 @@
       = "/"
 
   .template
-    - if @tpls.present?
-      - if @page.new_record? || !@page.template
-        = f.association :template
-      - else
-        - if @page.template
-          %p
-            = f.label :template
-            = @page.template.name
-            = link_to "change", edit_template_admin_page_path(p)
+    - if @page.new_record? || !@page.template
+      = f.association :template, :include_blank => false
+    - else
+      - if @page.template
+        %p
+          = f.label :template
+          = @page.template.name
+          = link_to "change", edit_template_admin_page_path(p)
 
   = f.simple_fields_for :contents, @page.contents.active.includes(:field) do |cf|
     - field = cf.object.field

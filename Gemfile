@@ -11,6 +11,7 @@ gem 'paper_trail', '2.2.4'
 gem 'attribute_normalizer', '0.3.1'
 gem 'ancestry', '1.2.4'
 gem 'cancan', '1.6.5'
+gem 'liquid', '2.2.2'
 
 group :test do
   # required to run tests

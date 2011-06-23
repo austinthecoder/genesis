@@ -10,7 +10,10 @@ describe Page, 'validations' do
     it { should be_valid }
 
     it { should_not accept_values_for(:user_id, nil) }
-    it { should_not accept_values_for(:title, '', '  ', nil) }
+
+    %w(title template_id).each do |attr|
+      it { should_not accept_values_for(attr, '', '  ', nil) }
+    end
 
     context "when it is a root page" do
       it { should_not accept_values_for(:slug, *@bad_slugs) }
