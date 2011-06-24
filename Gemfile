@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
-gem 'mysql2', '0.2.8'
+gem 'pg', '0.11.0'
 gem 'haml-rails', '0.3.4'
 gem 'compass', '0.11.3'
 gem 'devise', '1.3.4'
@@ -12,6 +12,7 @@ gem 'attribute_normalizer', '0.3.1'
 gem 'ancestry', '1.2.4'
 gem 'cancan', '1.6.5'
 gem 'liquid', '2.2.2'
+gem 'foreman', '0.18.0'
 
 group :test do
   # required to run tests
@@ -30,6 +31,7 @@ group :test do
 end
 
 group :development do
+  gem 'heroku'
   gem 'hpricot'
   gem 'ruby_parser'
 end
