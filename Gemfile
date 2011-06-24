@@ -13,6 +13,7 @@ gem 'ancestry', '1.2.4'
 gem 'cancan', '1.6.5'
 gem 'liquid', '2.2.2'
 gem 'foreman', '0.18.0'
+gem 'unicorn', '3.7.0'
 
 group :test do
   # required to run tests
