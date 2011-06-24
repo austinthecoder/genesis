@@ -22,7 +22,7 @@ describe Page::Drop do
 
   describe "instance methods" do
     before do
-      @page = Factory(:page)
+      @page = Factory(:page, :title => 'My Awesome Page')
       content = Factory(:content,
         :page => @page,
         :field => Factory(:field, :template => @page.template, :name => 'Body'),
@@ -31,19 +31,19 @@ describe Page::Drop do
     end
 
     it { should be_a(Liquid::Drop) }
+    it { should be_a(Comparable) }
+    its(:page) { should eq(@page) }
 
-    describe "#page" do
-      it { subject.page.should eq(@page) }
-    end
+    describe "#invoke_drop" do
+      it { subject.invoke_drop('Title').should eq("My Awesome Page") }
 
-    describe "#before_method" do
       context "when the method is the name of a page field" do
-        it { subject.before_method('Body').should == "I love soccer." }
+        it { subject.invoke_drop('Body').should == "I love soccer." }
       end
 
       context "when the method is not the name of a page field" do
         [nil, "foo", "body"].each do |method|
-          it { subject.before_method(method).should be_nil }
+          it { subject.invoke_drop(method).should be_nil }
         end
       end
     end

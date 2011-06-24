@@ -33,14 +33,14 @@ Feature: Viewing pages
   Scenario: Home page with a field
     Given I have a "Home" template:
       """
-      Home template
+      Welcome
+      {{ page['Title'] }}
       {{ page['Body'] }}
       """
     And I have a "Body" field for that template
     And I have a "Home" page for that template:
-      | Body | page body here |
+      | Body | <p>Thanks for visiting.</p> |
 
     When I visit "http://example.com/"
     Then I should see each of the following:
-      | Home template  |
-      | page body here |
+      | Welcome | Home | Thanks for visiting. |

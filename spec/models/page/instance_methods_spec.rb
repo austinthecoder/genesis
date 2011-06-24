@@ -104,7 +104,6 @@ describe Page, "instance methods" do
     end
 
     it "renders the parsed content" do
-      pending
       @parsed_content.should_receive(:render).with('page' => Page::Drop.new(subject))
       subject.to_html
     end
