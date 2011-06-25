@@ -25,9 +25,13 @@ class Page < ActiveRecord::Base
 
   ### validations ###
   validates :slug,
-    :presence => {:unless => :is_root?},
-    :inclusion => {:in => [nil], :if => :is_root?},
-    :format => {:with => /^[a-z0-9\-_]+$/i, :unless => :is_root?}
+    :unless => :is_root?,
+    :presence => true,
+    :format => {:with => /^[a-z0-9\-_]+$/i},
+    :uniqueness => {:scope => :ancestry}
+  validate(:if => :is_root?) do
+    errors.add(:slug, 'must be nil') if slug
+  end
   validates :user_id, :presence => true
   validates :title, :presence => true
   validates :template_id, :presence => true

@@ -20,4 +20,14 @@ class Template < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}
   validates :user_id, :presence => true
 
+  def destroy_with_page_checking
+    destroy_without_page_checking if pages.empty?
+  end
+
+  alias_method_chain :destroy, :page_checking
+
+  def destroy!
+    destroy || raise
+  end
+
 end

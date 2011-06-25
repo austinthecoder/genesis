@@ -28,7 +28,7 @@ module Admin
     end
 
     def destroy
-      @tpl.destroy
+      @tpl.destroy!
       undo_link = view_context.button_to("Undo", revert_admin_version_path(@tpl.versions.scoped.last))
       redirect_to admin_theme_url, :notice => "Template was removed. #{undo_link}"
     end

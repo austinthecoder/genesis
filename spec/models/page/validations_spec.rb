@@ -27,6 +27,11 @@ describe Page, 'validations' do
       it { should_not accept_values_for(:slug, '', '  ', nil) }
       it { should_not accept_values_for(:slug, *@bad_slugs) }
       it { should accept_values_for(:slug, 'myslug') }
+
+      it "slug must be unique among siblings" do
+        Factory(:sub_page, :parent => subject.parent, :slug => 'a')
+        should_not accept_values_for(:slug, 'a')
+      end
     end
 
     # user_id must match parent on update

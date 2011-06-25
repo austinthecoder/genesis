@@ -16,7 +16,7 @@ gem 'unicorn', '3.7.0'
 
 group :test do
   # required to run tests
-  gem 'cucumber-rails', '1.0.0'
+  gem 'cucumber-rails', '0.5.2'
   gem 'rspec-rails', '2.6.1'
   gem 'database_cleaner', '0.6.7'
   gem 'launchy', '0.4.0'
