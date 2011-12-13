@@ -1,5 +1,5 @@
 .section
-  = render 'form'
+  = render 'form', :tpl => @tpl
 
 = content_for :sidebar do
-  = render 'list'
+  = render 'list', :tpls => @tpls

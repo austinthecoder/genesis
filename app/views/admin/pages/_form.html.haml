@@ -1,7 +1,7 @@
-= simple_form_for (@page.is_root? ? [:admin, @page] : [:admin, @parent_page, @page]) do |f|
+= simple_form_for (page.is_root? ? [:admin, page] : [:admin, parent_page, page]) do |f|
   = f.input :title, :wrapper_html => {:class => 'title'}
 
-  - if @page.slug_editable?
+  - if page.slug_editable?
     = f.input :slug, :label => 'Permalink', :wrapper_html => {:class => 'slug'}
   - else
     %p
@@ -9,16 +9,16 @@
       = "/"
 
   .template
-    - if @page.new_record? || !@page.template
+    - if page.new_record? || !page.template
       = f.association :template, :include_blank => false
     - else
-      - if @page.template
+      - if page.template
         %p
           = f.label :template
-          = @page.template.name
+          = page.template_name
           = link_to "change", edit_template_admin_page_path(p)
 
-  = f.simple_fields_for :contents, @page.contents.active.includes(:field) do |cf|
+  = f.simple_fields_for :contents, page.contents.active.includes(:field) do |cf|
     - field = cf.object.field
     = cf.input :body,
       :label => field.name.titleize,

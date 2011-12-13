@@ -3,7 +3,7 @@
 
   %table
     %tbody
-      - @tpls.each do |t|
+      - tpls.each do |t|
         %tr{:class => "template_#{t.id}"}
           %td= link_to t.name, edit_admin_template_path(t)
           %td

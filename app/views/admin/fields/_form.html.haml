@@ -1,6 +1,6 @@
-= simple_form_for (@field.new_record? ? [:admin, @tpl, @field] : [:admin, @field]) do |f|
+= simple_form_for (field.new_record? ? [:admin, tpl, field] : [:admin, field]) do |f|
   = f.input :name, :wrapper_html => {:class => 'name'}
-  - if @field.new_record?
+  - if field.new_record?
     = f.input :field_type,
       :collection => Field::TYPE_OPTIONS,
       :label_method => :last,
@@ -9,4 +9,4 @@
       :label => 'Type'
   %div
     %button{:type => 'submit'}
-      = @field.new_record? ? 'Add' : 'Save'
+      = field.new_record? ? 'Add' : 'Save'

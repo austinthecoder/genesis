@@ -24,4 +24,4 @@
             = button_to "remove", admin_field_path(f), :method => "delete"
 
 .section
-  = render 'form'
+  = render 'form', :field => @field, :tpl => @tpl

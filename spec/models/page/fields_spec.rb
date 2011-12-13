@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Page, 'fields' do
   subject { @page.fields }
-  
+
   before { @page = Factory(:page) }
-  
+
   describe "#create_contents!" do
     [1, 2].each do |nbr_fields|
       context "with #{nbr_fields} fields" do

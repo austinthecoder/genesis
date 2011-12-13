@@ -66,7 +66,7 @@ describe Admin::FieldsController, "member actions" do
           @params[:field] = {:name => ''}
           put :update, @params
         end
-        
+
         it { response.should render_template(:edit) }
       end
 
@@ -75,7 +75,7 @@ describe Admin::FieldsController, "member actions" do
           @params[:field] = {:name => 'something'}
           put :update, @params
         end
-        
+
         it { response.should redirect_to(admin_template_fields_url(@field.template)) }
       end
     end

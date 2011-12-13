@@ -628,3 +628,10 @@ h1, h2, h3 {
 .pages .actions {
   float: right;
 }
+
+/* line 84, ../../app/stylesheets/admin.scss */
+#editor {
+  background: white;
+  height: 600px;
+  width: 700px;
+}

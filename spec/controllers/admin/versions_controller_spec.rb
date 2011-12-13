@@ -18,7 +18,7 @@ describe Admin::VersionsController do
 
           post :revert, :id => @version.id
         end
-        
+
         it { response.should redirect_to(admin_template_fields_url(@field.template)) }
 
         it "restores the field" do
@@ -34,7 +34,7 @@ describe Admin::VersionsController do
 
           post :revert, :id => @version.id
         end
-        
+
         it { response.should redirect_to(admin_theme_url) }
 
         it "restores the template" do
@@ -50,7 +50,7 @@ describe Admin::VersionsController do
 
           post :revert, :id => @version.id
         end
-        
+
         it { response.should redirect_to(admin_pages_url) }
 
         it "restores the page" do

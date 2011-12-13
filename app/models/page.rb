@@ -45,6 +45,8 @@ class Page < ActiveRecord::Base
     end
   end
 
+  delegate :name, :to => :template, :prefix => true, :allow_nil => true
+
   def to_html
     liquid_template.render('page' => Drop.new(self))
   end

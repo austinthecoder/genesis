@@ -2,15 +2,17 @@ module AdminHelper
 
   def javascripts
     [
-      'json2', # required for backbone
+      # 'json2', # required for backbone
       'jquery', # required for backbone
-      'underscore', # required for backbone
-      'backbone', # see http://documentcloud.github.com/backbone
-      'codemirror',
-      'codemirror/mode/javascript/javascript',
-      'codemirror/mode/css/css',
-      'codemirror/mode/xml/xml',
-      'codemirror/mode/htmlmixed/htmlmixed',
+      # 'underscore', # required for backbone
+      # 'backbone', # see http://documentcloud.github.com/backbone
+      # 'codemirror',
+      # 'codemirror/mode/javascript/javascript',
+      # 'codemirror/mode/css/css',
+      # 'codemirror/mode/xml/xml',
+      # 'codemirror/mode/htmlmixed/htmlmixed',
+      'ace/ace.js',
+      'ace/mode-html.js',
       'base' # application specific code
     ].map { |f| "admin/#{f}" }
   end

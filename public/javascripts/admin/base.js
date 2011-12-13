@@ -14,9 +14,14 @@ WebFontConfig = {
 //////////////////////////////////////////////////
 
 $(function() {
-  var editor = CodeMirror.fromTextArea($('form.page textarea')[0], {
-    mode: "htmlmixed",
-    lineNumbers: true,
-    tabMode: 'indent'
-  });
+  // var editor = CodeMirror.fromTextArea($('form.page textarea')[0], {
+  //   mode: "htmlmixed",
+  //   lineNumbers: true,
+  //   tabMode: 'indent'
+  // });
+
+  var editor = ace.edit("editor");
+  var HTMLMode = require("ace/mode/html").Mode;
+
+  editor.getSession().setMode(new HTMLMode());
 });
